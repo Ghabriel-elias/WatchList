@@ -1,11 +1,8 @@
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
-export const Container = styled.View`
-  /* padding: 0px 20px; */
+export const Container = styled.SafeAreaView`
   flex: 1;
-  justify-content: center;
-  align-items: center;
   background-color: ${({theme}) => theme.colors.primaryColor};
 `
 
@@ -30,6 +27,6 @@ export const TitlePopular = styled.Text`
 `;
 
 export const ViewTitle = styled.View`
-  padding: 0px ${RFValue(30)}px;
+  padding: 0px ${RFValue(20)}px;
   margin-bottom: ${RFValue(10)}px;
 `;

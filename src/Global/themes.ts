@@ -1,8 +1,11 @@
 export default {
   colors: {
     primaryColor: '#242A32',
+    secundaryColor: '#0296E5',
     lightColor: '#FFFFFF',
-    borderPopular: '#0296E5',
+    darkColor: '#000000',
+    disactiveTabBar: '#92929D',
+    transparent: 'transparent'
   },
   fonts: {
     poppinsLight: 'Poppins-Light',

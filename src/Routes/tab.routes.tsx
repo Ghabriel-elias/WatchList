@@ -17,7 +17,6 @@ const icons = {
     name: "bookmark"
   },
 }
-
 const Tab = createBottomTabNavigator()
 
 const Stack = createStackNavigator()   
@@ -29,9 +28,16 @@ export const TabRoutes = () => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarIcon: ({ size }) => {
+        tabBarInactiveTintColor: colors.disactiveTabBar,
+        tabBarStyle: {
+          backgroundColor: colors.primaryColor,
+          borderTopColor: colors.secundaryColor,
+          height: 55,
+          paddingBottom: 5
+        },
+        tabBarIcon: ({ size, focused }) => {
           const { name } = icons[route.name]
-          return <Feather name={name} color={colors.primaryColor} size={size} />
+          return <Feather name={name} size={size} color={focused ? colors.secundaryColor : colors.disactiveTabBar} />
         }
       })}
     >
