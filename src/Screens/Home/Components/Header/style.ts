@@ -20,5 +20,5 @@ export const ButtonRenderItem = styled.TouchableOpacity.attrs({
   align-items: center;
   justify-content: center;
   border-radius: ${RFValue(16)}px;
-  margin-right: ${RFValue(30)}px;
+  margin-right: ${RFValue(20)}px;
 `;
