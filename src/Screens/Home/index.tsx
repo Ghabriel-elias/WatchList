@@ -1,6 +1,6 @@
-import { FlatList, View } from "react-native"
+import { Animated, FlatList, View } from "react-native"
 import api from "../../Services/api"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as S from './style'
 import { HeaderHome } from "./Components/Header";
 import { TypeOfShow } from "./model";
@@ -62,6 +62,37 @@ export const Home = () => {
     console.log('teste de fn');
   })
 
+  const animation = useRef(new Animated.Value(1)).current; // 1 significa visível
+
+  const handleScroll = (event) => {
+    const yOffset = event.nativeEvent.contentOffset.y;
+
+    if (yOffset > 0) {
+      Animated.timing(animation, {
+        toValue: 0, // Oculto
+        duration: 300, // Duração da animação em milissegundos
+        useNativeDriver: false,
+      }).start();
+    } else {
+      Animated.timing(animation, {
+        toValue: 1, // Visível
+        duration: 300, // Duração da animação em milissegundos
+        useNativeDriver: false,
+      }).start();
+    }
+  };
+
+  const heightInterpolate = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 275], // Altura da vista, ajuste conforme necessário
+  });
+
+  const opacityInterpolate = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+  });
+
+
   useEffect(() => {
     requestShowByType('MOVIE')
   }, [])
@@ -73,8 +104,12 @@ export const Home = () => {
         listOfShows={listOfShows}
         selectedShow={selectedTypeOfShow}
       />
-      {showPopularList ? (
-        <View style={{marginBottom: 40}}>
+      <Animated.View
+        style={{
+          height: heightInterpolate,
+          opacity: opacityInterpolate,
+        }}
+      >
           <S.ViewTitle>
             <S.TitlePopular>Top 20 mais populares</S.TitlePopular>
           </S.ViewTitle>
@@ -86,8 +121,8 @@ export const Home = () => {
             horizontal
             ListFooterComponent={<S.ViewListEmptyComponent/>}
           />
-        </View>
-      ) : null}
+        {/* </View> */}
+     </Animated.View>
       <View>
         <FlatList
           style={{paddingLeft: 20}}
@@ -105,9 +140,7 @@ export const Home = () => {
           renderItem={renderItemListShows}
           numColumns={3}
           showsVerticalScrollIndicator={false}
-          onScroll={(event) => {
-            // setShowPopularList(false)
-          }}
+          onScroll={handleScroll}
           columnWrapperStyle={{
             gap: 10
           }}
