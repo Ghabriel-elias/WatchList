@@ -1,1 +1,0 @@
-export const cdnTmdb = 'https://image.tmdb.org/t/p/w500'
