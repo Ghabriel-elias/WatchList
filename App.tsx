@@ -5,10 +5,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from 'styled-components';
 import themes from './src/Global/themes';
 const Stack = createStackNavigator()   
+import {SafeAreaView} from 'react-native'
 
 function App(): React.JSX.Element {
 
   return (
+    <SafeAreaView style={{flex: 1, backgroundColor: themes.colors.primaryColor}}>
+      
     <ThemeProvider theme={themes}>
        <NavigationContainer>
         <Stack.Navigator initialRouteName='TabRoutes'>
@@ -18,6 +21,7 @@ function App(): React.JSX.Element {
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>
+          </SafeAreaView>
   );
 }
 

@@ -10,6 +10,6 @@ export const ContainerShow = styled.TouchableOpacity.attrs({
 `;
 
 export const ImageShow = styled.Image`
-  height: ${RFValue(140)}px;
+  height: ${RFValue(146)}px;
   border-radius: ${RFValue(8)}px;
 `;

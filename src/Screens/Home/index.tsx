@@ -19,6 +19,7 @@ export const Home = () => {
   const [selectedTypeOfShow, setSelectedTypeOfShow] = useState<TypeOfShow>(listOfShows[0])
   const [selectedGenre, setSelectedGenre] = useState()
   const [listOfMovies, setListOfMovies] = useState()
+  const [showPopularList, setShowPopularList] = useState(true)
 
   async function requestShowByType(typeOfShow: 'MOVIE' | 'TV_SERIES') {
     const queryPopularShows = `/${typeOfShow === 'MOVIE' ? 'movie': 'tv'}/popular?language=pt-BR&page=1`
@@ -72,22 +73,24 @@ export const Home = () => {
         listOfShows={listOfShows}
         selectedShow={selectedTypeOfShow}
       />
+      {showPopularList ? (
+        <View style={{marginBottom: 40}}>
+          <S.ViewTitle>
+            <S.TitlePopular>Top 20 mais populares</S.TitlePopular>
+          </S.ViewTitle>
+          <FlatList
+            style={{paddingLeft: 20}}
+            data={popularShows}
+            renderItem={renderItemPopularShows}
+            showsHorizontalScrollIndicator={false}
+            horizontal
+            ListFooterComponent={<S.ViewListEmptyComponent/>}
+          />
+        </View>
+      ) : null}
       <View>
-        <S.ViewTitle>
-          <S.TitlePopular>Top 20 mais populares</S.TitlePopular>
-        </S.ViewTitle>
         <FlatList
           style={{paddingLeft: 20}}
-          data={popularShows}
-          renderItem={renderItemPopularShows}
-          showsHorizontalScrollIndicator={false}
-          horizontal
-          ListFooterComponent={<S.ViewListEmptyComponent/>}
-        />
-      </View>
-      <View>
-        <FlatList
-          style={{paddingLeft: 20, marginTop: 40}}
           data={genres}
           renderItem={renderItemGenres}
           showsHorizontalScrollIndicator={false}
@@ -102,6 +105,9 @@ export const Home = () => {
           renderItem={renderItemListShows}
           numColumns={3}
           showsVerticalScrollIndicator={false}
+          onScroll={(event) => {
+            // setShowPopularList(false)
+          }}
           columnWrapperStyle={{
             gap: 10
           }}
