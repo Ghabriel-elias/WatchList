@@ -19,7 +19,7 @@ export const Home = () => {
   const [selectedTypeOfShow, setSelectedTypeOfShow] = useState<TypeOfShow>(listOfShows[0])
   const [selectedGenre, setSelectedGenre] = useState()
   const [listOfMovies, setListOfMovies] = useState()
-  const [showPopularList, setShowPopularList] = useState(true)
+  const [currentVisibility, setCurrentVisibility] = useState(true);
 
   async function requestShowByType(typeOfShow: 'MOVIE' | 'TV_SERIES') {
     const queryPopularShows = `/${typeOfShow === 'MOVIE' ? 'movie': 'tv'}/popular?language=pt-BR&page=1`
@@ -63,33 +63,42 @@ export const Home = () => {
   })
 
   const animation = useRef(new Animated.Value(1)).current; // 1 significa visível
+  const scrollY = useRef(new Animated.Value(0)).current;
 
-  const handleScroll = (event) => {
-    const yOffset = event.nativeEvent.contentOffset.y;
+  const handleScroll = Animated.event(
+    [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+    { useNativeDriver: false }
+  );
 
-    if (yOffset > 0) {
-      Animated.timing(animation, {
-        toValue: 0, // Oculto
-        duration: 300, // Duração da animação em milissegundos
-        useNativeDriver: false,
-      }).start();
-    } else {
-      Animated.timing(animation, {
-        toValue: 1, // Visível
-        duration: 300, // Duração da animação em milissegundos
-        useNativeDriver: false,
-      }).start();
-    }
-  };
+  useEffect(() => {
+    const listener = scrollY.addListener(({ value }) => {
+      if (value > 20 && currentVisibility) {
+        setCurrentVisibility(false);
+        Animated.timing(animation, {
+          toValue: 0, 
+          duration: 300, 
+          useNativeDriver: false,
+          delay: 100
+        }).start();
+      } else if (value <= 20 && !currentVisibility) {
+        setCurrentVisibility(true);
+        Animated.timing(animation, {
+          toValue: 1,
+          duration: 300, 
+          useNativeDriver: false,
+          delay: 100
+        }).start();
+      }
+    });
+
+    return () => {
+      scrollY.removeListener(listener);
+    };
+  }, [currentVisibility]);
 
   const heightInterpolate = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, 275], // Altura da vista, ajuste conforme necessário
-  });
-
-  const opacityInterpolate = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 1],
+    outputRange: [0, 310], 
   });
 
 
@@ -107,21 +116,20 @@ export const Home = () => {
       <Animated.View
         style={{
           height: heightInterpolate,
-          opacity: opacityInterpolate,
+          marginBottom: 15,
         }}
       >
-          <S.ViewTitle>
-            <S.TitlePopular>Top 20 mais populares</S.TitlePopular>
-          </S.ViewTitle>
-          <FlatList
-            style={{paddingLeft: 20}}
-            data={popularShows}
-            renderItem={renderItemPopularShows}
-            showsHorizontalScrollIndicator={false}
-            horizontal
-            ListFooterComponent={<S.ViewListEmptyComponent/>}
-          />
-        {/* </View> */}
+        <S.ViewTitle>
+          <S.TitlePopular>Top 20 mais populares</S.TitlePopular>
+        </S.ViewTitle>
+        <FlatList
+          style={{paddingLeft: 20}}
+          data={popularShows}
+          renderItem={renderItemPopularShows}
+          showsHorizontalScrollIndicator={false}
+          horizontal
+          ListFooterComponent={<S.ViewListEmptyComponent/>}
+        />
      </Animated.View>
       <View>
         <FlatList
@@ -134,17 +142,17 @@ export const Home = () => {
         />   
       </View>
       <View style={{flex: 1}}> 
-        <FlatList
-          style={{paddingHorizontal: 20, marginTop: 10}}
+      <Animated.FlatList
+          style={{ paddingHorizontal: 20, marginTop: 10 }}
           data={listOfMovies}
           renderItem={renderItemListShows}
           numColumns={3}
           showsVerticalScrollIndicator={false}
           onScroll={handleScroll}
           columnWrapperStyle={{
-            gap: 10
+            gap: 10,
           }}
-        />   
+        />
       </View>
     </S.Container>
   )
