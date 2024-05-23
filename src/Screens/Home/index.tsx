@@ -1,4 +1,4 @@
-import { Animated, FlatList, View } from "react-native"
+import { Animated, Dimensions, FlatList, ScrollView, View } from "react-native"
 import api from "../../Services/api"
 import { useEffect, useRef, useState } from "react";
 import * as S from './style'
@@ -7,6 +7,7 @@ import { TypeOfShow } from "./model";
 import { RenderItemPopularShows } from "./Components/RenderItemPopularShows";
 import { RenderItemGenres } from "./Components/RenderItemGenres";
 import { RenderItemListShows } from "./Components/RenderItemListShows";
+import themes from "../../Global/themes";
 
 export const Home = () => {
 
@@ -76,17 +77,15 @@ export const Home = () => {
         setCurrentVisibility(false);
         Animated.timing(animation, {
           toValue: 0, 
-          duration: 300, 
-          useNativeDriver: false,
-          delay: 100
+          duration: 500, 
+          useNativeDriver: true,
         }).start();
       } else if (value <= 20 && !currentVisibility) {
         setCurrentVisibility(true);
         Animated.timing(animation, {
           toValue: 1,
-          duration: 300, 
-          useNativeDriver: false,
-          delay: 100
+          duration: 500, 
+          useNativeDriver: true,
         }).start();
       }
     });
@@ -96,9 +95,9 @@ export const Home = () => {
     };
   }, [currentVisibility]);
 
-  const heightInterpolate = animation.interpolate({
+  const heightInterpolateTeste = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, 310], 
+    outputRange: [-330, 0], 
   });
 
 
@@ -107,53 +106,57 @@ export const Home = () => {
   }, [])
 
   return (
-    <S.Container>
+    <ScrollView style={{
+      backgroundColor: themes.colors.primaryColor
+    }}
+    stickyHeaderIndices={[2]}
+    >
+      <View style={{
+      backgroundColor: themes.colors.primaryColor,
+    }}>
       <HeaderHome
         handleRenderItem={changeTypeOfShow}
         listOfShows={listOfShows}
         selectedShow={selectedTypeOfShow}
       />
-      <Animated.View
-        style={{
-          height: heightInterpolate,
-          marginBottom: 15,
+      </View>
+    <View>
+      <S.ViewTitle>
+        <S.TitlePopular>Top 20 mais populares</S.TitlePopular>
+      </S.ViewTitle>
+      <FlatList
+        style={{paddingLeft: 20}}
+        data={popularShows}
+        renderItem={renderItemPopularShows}
+        showsHorizontalScrollIndicator={false}
+        horizontal
+        ListFooterComponent={<S.ViewListEmptyComponent/>}
+      />
+    </View>
+     <View style={{
+      backgroundColor: themes.colors.primaryColor,
+      height: 60,
+      paddingTop: 20
+     }}>
+      <FlatList
+      style={{paddingLeft: 20}}
+        data={genres}
+        renderItem={renderItemGenres}
+        showsHorizontalScrollIndicator={false}
+        horizontal
+        ListFooterComponent={<S.ViewListEmptyComponent/>}
+      />   
+     </View>
+     <FlatList
+        style={{ paddingHorizontal: 20, marginTop: 10}}
+        data={listOfMovies}
+        renderItem={renderItemListShows}
+        numColumns={3}
+        showsVerticalScrollIndicator={false}
+        columnWrapperStyle={{
+          gap: 10,
         }}
-      >
-        <S.ViewTitle>
-          <S.TitlePopular>Top 20 mais populares</S.TitlePopular>
-        </S.ViewTitle>
-        <FlatList
-          style={{paddingLeft: 20}}
-          data={popularShows}
-          renderItem={renderItemPopularShows}
-          showsHorizontalScrollIndicator={false}
-          horizontal
-          ListFooterComponent={<S.ViewListEmptyComponent/>}
-        />
-     </Animated.View>
-      <View>
-        <FlatList
-          style={{paddingLeft: 20}}
-          data={genres}
-          renderItem={renderItemGenres}
-          showsHorizontalScrollIndicator={false}
-          horizontal
-          ListFooterComponent={<S.ViewListEmptyComponent/>}
-        />   
-      </View>
-      <View style={{flex: 1}}> 
-      <Animated.FlatList
-          style={{ paddingHorizontal: 20, marginTop: 10 }}
-          data={listOfMovies}
-          renderItem={renderItemListShows}
-          numColumns={3}
-          showsVerticalScrollIndicator={false}
-          onScroll={handleScroll}
-          columnWrapperStyle={{
-            gap: 10,
-          }}
-        />
-      </View>
-    </S.Container>
+      />
+    </ScrollView>
   )
 }

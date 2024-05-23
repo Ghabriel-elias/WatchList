@@ -1,8 +1,9 @@
+import { Dimensions } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
-export const Container = styled.SafeAreaView`
-  flex: 1;
+export const Container = styled.ScrollView`
+  /* flex: 1; */
   background-color: ${({theme}) => theme.colors.primaryColor};
 `
 
