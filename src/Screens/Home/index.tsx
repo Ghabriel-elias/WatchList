@@ -7,7 +7,7 @@ import { TypeOfShow } from "./model";
 import { RenderItemPopularShows } from "./Components/RenderItemPopularShows";
 import { RenderItemGenres } from "./Components/RenderItemGenres";
 import { RenderItemListShows } from "./Components/RenderItemListShows";
-import themes from "../../Global/themes";
+import { Skeleton } from "./skeleton";
 
 export const Home = () => {
 
@@ -20,7 +20,6 @@ export const Home = () => {
   const [selectedTypeOfShow, setSelectedTypeOfShow] = useState<TypeOfShow>(listOfShows[0])
   const [selectedGenre, setSelectedGenre] = useState()
   const [listOfMovies, setListOfMovies] = useState()
-  const [currentVisibility, setCurrentVisibility] = useState(true);
 
   async function requestShowByType(typeOfShow: 'MOVIE' | 'TV_SERIES') {
     const queryPopularShows = `/${typeOfShow === 'MOVIE' ? 'movie': 'tv'}/popular?language=pt-BR&page=1`
@@ -63,63 +62,23 @@ export const Home = () => {
     console.log('teste de fn');
   })
 
-  const animation = useRef(new Animated.Value(1)).current; // 1 significa visível
-  const scrollY = useRef(new Animated.Value(0)).current;
-
-  const handleScroll = Animated.event(
-    [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-    { useNativeDriver: false }
-  );
-
-  useEffect(() => {
-    const listener = scrollY.addListener(({ value }) => {
-      if (value > 20 && currentVisibility) {
-        setCurrentVisibility(false);
-        Animated.timing(animation, {
-          toValue: 0, 
-          duration: 500, 
-          useNativeDriver: true,
-        }).start();
-      } else if (value <= 20 && !currentVisibility) {
-        setCurrentVisibility(true);
-        Animated.timing(animation, {
-          toValue: 1,
-          duration: 500, 
-          useNativeDriver: true,
-        }).start();
-      }
-    });
-
-    return () => {
-      scrollY.removeListener(listener);
-    };
-  }, [currentVisibility]);
-
-  const heightInterpolateTeste = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [-330, 0], 
-  });
-
-
   useEffect(() => {
     requestShowByType('MOVIE')
   }, [])
 
   return (
-    <ScrollView style={{
-      backgroundColor: themes.colors.primaryColor
-    }}
-    stickyHeaderIndices={[2]}
-    >
-      <View style={{
-      backgroundColor: themes.colors.primaryColor,
-    }}>
-      <HeaderHome
+    <S.Container stickyHeaderIndices={[2]}>
+    <S.ViewHeader>
+      {/* <HeaderHome
         handleRenderItem={changeTypeOfShow}
         listOfShows={listOfShows}
         selectedShow={selectedTypeOfShow}
+      /> */}
+      <Skeleton
+        height={210}
+        width={140}
       />
-      </View>
+    </S.ViewHeader>
     <View>
       <S.ViewTitle>
         <S.TitlePopular>Top 20 mais populares</S.TitlePopular>
@@ -133,20 +92,16 @@ export const Home = () => {
         ListFooterComponent={<S.ViewListEmptyComponent/>}
       />
     </View>
-     <View style={{
-      backgroundColor: themes.colors.primaryColor,
-      height: 60,
-      paddingTop: 20
-     }}>
+     <S.ViewListGenres>
       <FlatList
-      style={{paddingLeft: 20}}
+        style={{paddingLeft: 20}}
         data={genres}
         renderItem={renderItemGenres}
         showsHorizontalScrollIndicator={false}
         horizontal
         ListFooterComponent={<S.ViewListEmptyComponent/>}
       />   
-     </View>
+     </S.ViewListGenres>
      <FlatList
         style={{ paddingHorizontal: 20, marginTop: 10}}
         data={listOfMovies}
@@ -157,6 +112,6 @@ export const Home = () => {
           gap: 10,
         }}
       />
-    </ScrollView>
+    </S.Container>
   )
 }
