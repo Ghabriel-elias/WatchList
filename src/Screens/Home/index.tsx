@@ -57,12 +57,28 @@ export const Home = () => {
     await requestShowByType(item.name === 'Filmes' ? 'MOVIE' : 'TV_SERIES')
   }
 
-  async function getMoviesByGenreId(item: any, typeOfShow: 'MOVIE' | 'TV_SERIES') {
-    setSelectedGenre(item)
-    const query = `/discover/${typeOfShow === 'MOVIE' ? 'movie' : 'tv'}?language=pt-BR&page=1&with_genres=${item?.id}`
+  const [pageMovieList, setPageMovieList] = useState(1)
+
+  const [loadingMovieList, setLoadingMovieList] = useState(false)
+  async function getMoviesByGenreId(item: any, typeOfShow: 'MOVIE' | 'TV_SERIES', pagin?: boolean) {
+    console.log('pageMovieList',pageMovieList)
+    if(!pagin) {
+      setListOfShows(null)
+      setSelectedGenre(item)
+    } 
+    const query = `/discover/${typeOfShow === 'MOVIE' ? 'movie' : 'tv'}?language=pt-BR&page=${pageMovieList}&with_genres=${item?.id}`
     const responseDiscoverShows = await api.get(query)
     if(responseDiscoverShows) {
-      setListOfShows(responseDiscoverShows?.data?.results)
+      if(!pagin) {
+       setListOfShows(responseDiscoverShows?.data?.results)
+
+      } else {
+        setListOfShows([
+          ...listOfShows,
+          ...responseDiscoverShows?.data?.results
+        ])
+        setLoadingMovieList(false)
+      }
     }
   }
 
@@ -75,7 +91,7 @@ export const Home = () => {
   }, [])
 
   return (
-    <S.Container stickyHeaderIndices={[2]}>
+    <S.Container showsHorizontalScrollIndicator stickyHeaderIndices={[2]}>
     <S.ViewHeader>
       <HeaderHome
         handleRenderItem={changeTypeOfShow}
@@ -113,9 +129,17 @@ export const Home = () => {
         data={dataForSkeletonRender}
         renderItem={RenderItemListShows}
         scrollEnabled={!!listOfShows}
-        data={!popularShows ? dataForSkeletonRender : listOfShows}
+        data={!listOfShows ? dataForSkeletonRender : listOfShows}
         renderItem={({item}) => RenderItemListShows({item, handleRenderItem: teste, renderSkeleton: !popularShows})}
         numColumns={3}
+        onEndReachedThreshold={0.5}
+        onEndReached={() => {
+          console.log('ouxe')
+          // if(loadingMovieList) return
+          // setLoadingMovieList(true)
+          // setPageMovieList(prev => prev + 1)
+          // await getMoviesByGenreId(selectedGenre,selectedTypeOfShow.name === 'Filmes' ? 'MOVIE' : 'TV_SERIES')
+        }}
         showsVerticalScrollIndicator={false}
         columnWrapperStyle={{
           gap: 10,
