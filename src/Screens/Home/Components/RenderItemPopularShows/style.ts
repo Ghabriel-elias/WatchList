@@ -6,13 +6,13 @@ export const ViewRenderItem = styled.TouchableOpacity.attrs({
 })`
   width: ${RFValue(140)}px;
   height: ${RFValue(210)}px;
-  background-color: red;
   margin-right: ${RFValue(10)}px;
   border-radius: ${RFValue(8)}px;
 `;
 
-export const MovieImage = styled.Image`
+export const MovieImage = styled.ImageBackground`
   height: 100%;
   width: 100%;
+  overflow: hidden;
   border-radius: ${RFValue(8)}px;
 `;

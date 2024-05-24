@@ -9,7 +9,8 @@ export const ContainerShow = styled.TouchableOpacity.attrs({
   border-radius: ${RFValue(8)}px;
 `;
 
-export const ImageShow = styled.Image`
+export const ImageShow = styled.ImageBackground`
   height: ${RFValue(146)}px;
   border-radius: ${RFValue(8)}px;
+  overflow: hidden;
 `;

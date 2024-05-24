@@ -27,13 +27,27 @@ export interface ShowProps {
   vote_count: number;
 }
 
-export interface GenreProps {
+interface DataSkeletonProps {
   id: number;
-  name: string;
+}[]
+
+
+export interface RenderItemPopularShowsProps {
+  item: ShowProps | DataSkeletonProps;
+  handleRenderItem: () => void;
+  renderSkeleton: boolean;
 }
 
 export interface RenderItemGenresProps {
+  item: GenreProps | DataSkeletonProps; 
+  renderSkeleton: boolean;
   getMoviesByGenreId: (item: TypeOfShow, TypeOfShow: 'MOVIE' | 'TV_SERIES') => void;
-  selectedGenre: GenreProps;
+  selectedGenre: GenreProps | null;
   selectedTypeOfShow: TypeOfShow;
+}
+
+
+export interface GenreProps {
+  id: number;
+  name: string;
 }
