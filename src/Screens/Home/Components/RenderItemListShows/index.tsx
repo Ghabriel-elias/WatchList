@@ -1,6 +1,6 @@
 import { RFValue } from 'react-native-responsive-fontsize'
 import { imageUrl } from '../../../../Global/imageUrl'
-import { RenderItemPopularShowsProps, ShowProps } from '../../model'
+import { RenderItemPopularShowsProps } from '../../model'
 import * as S from './style'
 import { GlobalSkeletonComponent } from '../../../../Components/GlobalSkeletonComponent'
 import { GlobalShadow } from '../../../../Global/Hoc'
@@ -10,14 +10,14 @@ export const RenderItemListShows = ({item, handleRenderItem, renderSkeleton}: Re
   renderSkeleton ? (
     <GlobalSkeletonComponent
       customStyle={{
-        marginBottom: RFValue(10),
-        flex: 0.33,
+        flex: 1,
         height: RFValue(146),
         borderRadius: RFValue(8),
+        margin: RFValue(4),
       }}
     />
   ) : (
-    <S.ContainerShow onPress={handleRenderItem}>
+    <S.ContainerShow onPress={() => handleRenderItem(item)}>
       <S.ImageShow
         resizeMode="cover"
         defaultSource={require('../../../../Assets/defaultImage.jpg')}

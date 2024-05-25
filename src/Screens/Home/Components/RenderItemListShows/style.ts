@@ -4,13 +4,13 @@ import styled from "styled-components/native";
 export const ContainerShow = styled.TouchableOpacity.attrs({
   activeOpacity: 0.5,
 })`
-  flex: 0.33;
-  margin-bottom: ${RFValue(10)}px;
+  flex: 1;
   border-radius: ${RFValue(8)}px;
+  margin: ${RFValue(4)}px;
 `;
 
 export const ImageShow = styled.ImageBackground`
-  height: ${RFValue(146)}px;
+  height: ${RFValue(140)}px;
   border-radius: ${RFValue(8)}px;
   overflow: hidden;
 `;

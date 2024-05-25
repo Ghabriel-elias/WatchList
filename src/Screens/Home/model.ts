@@ -1,3 +1,4 @@
+import { DataSkeletonProps } from "../../Components/GlobalSkeletonComponent/model";
 
 export interface TypeOfShow {
   id: number;
@@ -27,23 +28,18 @@ export interface ShowProps {
   vote_count: number;
 }
 
-interface DataSkeletonProps {
-  id: number;
-}[]
-
 
 export interface RenderItemPopularShowsProps {
   item: ShowProps | DataSkeletonProps;
-  handleRenderItem: () => void;
+  handleRenderItem: (item: ShowProps) => void;
   renderSkeleton: boolean;
 }
 
-export interface RenderItemGenresProps {
+export interface RenderItemHorizontalList {
   item: GenreProps | DataSkeletonProps; 
   renderSkeleton: boolean;
-  getMoviesByGenreId: (item: TypeOfShow, TypeOfShow: 'MOVIE' | 'TV_SERIES') => void;
-  selectedGenre: GenreProps | null;
-  selectedTypeOfShow: TypeOfShow;
+  handleRenderItem: (item: TypeOfShow) => void;
+  selectedOption: GenreProps | null;
 }
 
 
