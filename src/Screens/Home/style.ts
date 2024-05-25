@@ -1,7 +1,8 @@
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
-export const Container = styled.ScrollView`
+export const Container = styled.View`
+  flex: 1;
   background-color: ${({theme}) => theme.colors.primaryColor};
 `
 
@@ -28,6 +29,5 @@ export const ViewHeader = styled.View`
 
 export const ViewListGenres = styled.View`
   background-color: ${({theme}) => theme.colors.primaryColor}; 
-  height: ${RFValue(60)}px;
-  padding-top: ${RFValue(20)}px;
+  height: ${RFValue(30)}px;
 `;

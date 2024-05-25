@@ -25,7 +25,7 @@ export const RenderItemGenres = ({
       getMoviesByGenreId(item, selectedTypeOfShow?.name === 'Filmes' ? 'MOVIE' : 'TV_SERIES')
     }}>
       <GlobalTextComponent
-        color="lightColor"
+        color={selectedGenre?.id === item?.id ? "secundaryColor" : "lightColor"}
         fontFamily="poppinsMedium"
         fontSize={14}
         text={item?.name}

@@ -13,5 +13,5 @@ export const ContainerGenre = styled.TouchableOpacity.attrs({
   padding: 0px ${RFValue(5)}px;
   justify-content: 'center';
   border-bottom-width: ${({selectedGenre}) => selectedGenre ? 4 : 0}px;
-  border-bottom-color: ${({theme}) => theme.colors.borderGenreColor}
+  border-bottom-color: ${({theme}) => theme.colors.secundaryColor}
 `;
