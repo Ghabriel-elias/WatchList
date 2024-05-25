@@ -6,6 +6,8 @@ import { useHomeViewModel } from "./viewModel";
 import * as S from './style'
 import { HeaderHome } from "./Components/Header";
 import { ListOptions } from "../../Components/ListOptions";
+import LinearGradient from "react-native-linear-gradient";
+import { RFValue } from "react-native-responsive-fontsize";
 
 export const Home = () => {
   const {
@@ -14,6 +16,7 @@ export const Home = () => {
     genres,
     genreItemSize,
     dataGenres,
+    listOfShowsRef,
     listOfShows,
     dataShows,
     showItemSize,
@@ -22,40 +25,60 @@ export const Home = () => {
     selectedGenre,
     listOfTypeShows,
     getMoviesByGenreId,
-    handleNavigateShowDetails
+    handleNavigateShowDetails,
+    listOfGenresRef
   } = useHomeViewModel()
 
   return (
     <S.Container>
-      <S.ViewHeader>
-        <HeaderHome
-          handleRenderItem={changeTypeOfShow}
-          listOfShows={listOfTypeShows}
-          selectedShow={selectedTypeOfShow}
+    <View>
+    <LinearGradient 
+        colors={['rgba(22, 24, 24, 0.8)', 'rgb(38, 42, 48)']}
+        start={{ x: 0, y: 2 }}
+        end={{ x: 0, y: 0 }}
+        style={{
+          position: 'absolute',
+          top: 0,
+        }}
+      >
+        <S.ViewHeader>
+          <HeaderHome
+            handleRenderItem={changeTypeOfShow}
+            listOfShows={listOfTypeShows}
+            selectedShow={selectedTypeOfShow}
+          />
+        </S.ViewHeader>
+        <ListOptions
+          listRef={listOfGenresRef}
+          selectedOption={selectedGenre}
+          data={dataGenres}
+          estimatedItemSize={genreItemSize}
+          handleRenderItem={getMoviesByGenreId}
+          scrollEnabled={!!genres}
+          extraData={[selectedGenre, listOfGenresRef]}
+          renderSkeleton={!genres}
         />
-      </S.ViewHeader>
-      <ListOptions
-        selectedOption={selectedGenre}
-        data={dataGenres}
-        estimatedItemSize={genreItemSize}
-        handleRenderItem={getMoviesByGenreId}
-        scrollEnabled={!!genres}
-        extraData={[selectedGenre]}
-        renderSkeleton={!genres}
-      />
-     <View style={{flex: 1}}>
+      </LinearGradient>
+    </View>
+     <View style={{flex: 1, zIndex: -10}}>
      <FlashList
         scrollEnabled={!!listOfShows}
         data={dataShows}
         renderItem={({item}) => RenderItemListShows({item, handleRenderItem: handleNavigateShowDetails, renderSkeleton: !listOfShows})}
         numColumns={3}
+        ref={listOfShowsRef}
+        extraData={[listOfShowsRef]}
         estimatedItemSize={showItemSize}
         estimatedListSize={{width: Dimensions.get('screen').width, height: dataShows?.length * showItemSize - 4}}
         onEndReached={handleEndReached}
-        contentContainerStyle={{paddingHorizontal: 20, paddingTop: 10}}
-        onEndReachedThreshold={0.3}
+        contentContainerStyle={{paddingHorizontal: 20, paddingTop: RFValue(135)}}
+        onEndReachedThreshold={0.1}
         showsVerticalScrollIndicator={false}
-        ListFooterComponent={loadingMovieList ? <ActivityIndicator size={45} color={themes.colors.secundaryColor}/> : null}
+        ListFooterComponent={loadingMovieList ? (
+          <View style={{height: 80, justifyContent:'center', alignItems: 'center',width: '100%'}}>
+            <ActivityIndicator size={45} color={themes.colors.secundaryColor}/>
+          </View>
+        ) : null}
       />
      </View>
     </S.Container>

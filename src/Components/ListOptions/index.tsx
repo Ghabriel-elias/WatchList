@@ -11,13 +11,15 @@ export const ListOptions = ({
   extraData,
   handleRenderItem,
   selectedOption,
-  renderSkeleton
+  renderSkeleton,
+  listRef
 }: ListOptionsProps) => (
   <S.ViewListOptions>
     <FlashList
       scrollEnabled={scrollEnabled}
       estimatedItemSize={RFValue(estimatedItemSize)}
       extraData={extraData}
+      ref={listRef}
       data={data}
       estimatedListSize={{height: RFValue(30), width: data?.length * RFValue(estimatedItemSize)}}
       renderItem={({item}) => RenderItemOptions({item, handleRenderItem, renderSkeleton, selectedOption})}

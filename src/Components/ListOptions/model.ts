@@ -6,4 +6,5 @@ export interface ListOptionsProps {
   handleRenderItem: (item: any) => void;
   selectedOption: any;
   renderSkeleton?: boolean;
+  listRef?: any;
 }

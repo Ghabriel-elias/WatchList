@@ -23,9 +23,7 @@ export const ViewListEmptyComponent = styled.View`
   width: ${RFValue(20)}px;
 `;
 
-export const ViewHeader = styled.View`
-  background-color: ${({theme}) => theme.colors.primaryColor}; 
-`;
+export const ViewHeader = styled.View``;
 
 export const ViewListGenres = styled.View`
   background-color: ${({theme}) => theme.colors.primaryColor}; 

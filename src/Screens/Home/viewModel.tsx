@@ -1,7 +1,6 @@
 import api from "../../Services/api"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GenreProps, ShowProps, TypeOfShow } from "./model";
-import { RFValue } from "react-native-responsive-fontsize";
 import { useNavigation } from "@react-navigation/native";
 
 const dataForSkeletonRender = [
@@ -46,6 +45,8 @@ export const useHomeViewModel = () => {
   const {navigate} = useNavigation()
   const showItemSize = 140
   const genreItemSize = 193
+  const listOfShowsRef = useRef<any>(null);
+  const listOfGenresRef = useRef<any>(null);
   
   async function requestShowByType(typeOfShow: 'MOVIE' | 'TV_SERIES') {
     // const queryPopularShows = `/${typeOfShow === 'MOVIE' ? 'movie': 'tv'}/popular?language=pt-BR&page=1`
@@ -70,6 +71,8 @@ export const useHomeViewModel = () => {
   }
 
   async function changeTypeOfShow(item: TypeOfShow) {
+    listOfShowsRef.current?.scrollToOffset({animated: true, offset: 0})
+    listOfGenresRef.current?.scrollToOffset({animated: true, offset: 0})
     clearStates()
     setSelectedTypeOfShow(item)
     await requestShowByType(item.name === 'Filmes' ? 'MOVIE' : 'TV_SERIES')
@@ -79,6 +82,7 @@ export const useHomeViewModel = () => {
     const verifyTypeOfShow = typeOfShow ? typeOfShow : selectedTypeOfShow?.name === 'Filmes' ? 'MOVIE' : 'TV_SERIES'
     const verifyPage = page ? page : pageMovieList
     if(!page) {
+      listOfShowsRef.current?.scrollToOffset({animated: true, offset: 0})
       setListOfShows(null)
       setSelectedGenre(item)
     }
@@ -86,7 +90,6 @@ export const useHomeViewModel = () => {
     const responseDiscoverShows = await api.get(query)
     if(responseDiscoverShows) {
       if(!page) {
-        console.log(responseDiscoverShows?.data?.results?.length);
         setListOfShows(responseDiscoverShows?.data?.results)
       } else {
         setListOfShows([
@@ -119,6 +122,8 @@ export const useHomeViewModel = () => {
     changeTypeOfShow,
     selectedTypeOfShow,
     genres,
+    listOfShowsRef,
+    listOfGenresRef,
     genreItemSize,
     dataGenres,
     listOfShows,

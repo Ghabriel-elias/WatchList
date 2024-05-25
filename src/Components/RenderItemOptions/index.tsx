@@ -15,8 +15,9 @@ export const RenderItemOptions = ({
     <GlobalSkeletonComponent
       customStyle={{
         marginRight: RFValue(12),
-        height: RFValue(30),
-        width: RFValue(70),
+        height: RFValue(15),
+        borderRadius: RFValue(4),
+        width: RFValue(75),
       }}
     />
   ) : (
