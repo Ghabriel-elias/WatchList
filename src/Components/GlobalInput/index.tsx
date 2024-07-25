@@ -1,4 +1,4 @@
-import { Animated, Keyboard, TextInput } from 'react-native'
+import { Animated, Keyboard, TextInput, ViewStyle } from 'react-native'
 import * as S from './styles'
 import themes from '../../Global/themes'
 import { useEffect, useRef, useState } from 'react'
@@ -12,6 +12,7 @@ interface GlobalInputProps  {
     ref?: React.MutableRefObject<TextInput | undefined>;
     onBlur?: () => void;
     onFocus?: () => void;
+    style?: ViewStyle
 }
 
 export const GlobalInput = ({
@@ -20,7 +21,8 @@ export const GlobalInput = ({
     onFocus,
     label,
     onBlur,
-    ref
+    ref,
+    style
 }: GlobalInputProps) => {
 
     const animatedLabelRef = useRef(new Animated.Value(0)).current;
@@ -50,7 +52,7 @@ export const GlobalInput = ({
     }, [animationTop, ref]);
 
     return (
-        <S.Container>
+        <S.Container style={style}>
             {showLabel  ? (
                 <S.AnimatedLabel  
                   style={{

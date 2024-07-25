@@ -13,20 +13,21 @@ export const AuthView = () => {
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: themes.colors.primaryColor, paddingHorizontal: 16, justifyContent: 'space-between'}}>
-            <View style={{alignItems: 'center', justifyContent: 'center',}}>
+            <View>
                 <GlobalTextComponent
                   color="lightColor"
                   fontFamily="poppinsSemiBold"
-                  fontSize={18}
-                  text={`Seja bem vindo ao\nMovie App`}
-                  textAlign="center"
+                  fontSize={17}
+                  text={`Seja bem vindo ao Movie App`}
+                  style={{paddingVertical: 16}}
                 />
             </View>
-            <View>
+            <View style={{flex: 1}}>
               <GlobalInput
                 onChangeText={setEmail}
                 value={email}
                 label="Nome"
+                style={{marginBottom: 16}}
               />
               <GlobalInput
                 onChangeText={setPassword}
