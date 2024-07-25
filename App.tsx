@@ -5,13 +5,14 @@ import { ThemeProvider } from 'styled-components';
 import themes from './src/Global/themes';
 import {SafeAreaView} from 'react-native'
 import { AppRoutes } from './src/Routes/app.routes';
+import { AuthRoutes } from './src/Routes/auth.routes';
 
 function App(): React.JSX.Element {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: themes.colors.primaryColor}}>
       <ThemeProvider theme={themes}>
         <NavigationContainer>
-          <AppRoutes/>
+          <AuthRoutes/>
         </NavigationContainer>
       </ThemeProvider>
     </SafeAreaView>
