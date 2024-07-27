@@ -2,7 +2,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import { ShowProps } from '../Screens/Home/model';
 
 export type RootStackParamList = {
-  ShowsDetails: ShowProps
+  ShowsDetails: ShowProps;
+  Register: undefined;
 };
 
 export type NavigationProp = StackNavigationProp<RootStackParamList>;
