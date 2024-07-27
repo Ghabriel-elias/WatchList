@@ -4,7 +4,7 @@ import { GlobalInput } from "../../Components/GlobalInput"
 import { GlobalButton } from "../../Components/GlobalButton"
 import { AuthFooter } from "./Components/Footer"
 import * as S from "./style"
-import { LineSeparator } from "./Components/LineSeparater"
+import { LineSeparator } from "../../Components/LineSeparater"
 import { useLoginModel } from "./model"
 
 export const LoginView = ({
@@ -15,7 +15,8 @@ export const LoginView = ({
   inputRef, 
   loading,
   handleGuest,
-  handleLogin
+  handleLogin,
+  handleRegister
 }: ReturnType<typeof useLoginModel>) => {
 
     return (
@@ -58,18 +59,18 @@ export const LoginView = ({
             text="Criar conta"
             type="outline"
             fontSize={13}
-            handleButton={() => {}}
+            handleButton={handleRegister}
           />
         </View>
         <GlobalButton
           color="secundaryColor"
-          text="Explorar"
+          text="Continuar sem conta"
           type="transparent"
           fontSize={13}
           handleButton={handleGuest}
           style={{marginBottom: 16}}
         />
-        <AuthFooter/>
+        {/* <AuthFooter/> */}
       </S.Container>
     )
 }

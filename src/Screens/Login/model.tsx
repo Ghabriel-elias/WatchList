@@ -5,17 +5,22 @@ import { setIsGuest, setUser } from "../../Store/user"
 import { login } from "../../Services/auth"
 import { globalMessage } from "../Functions/useGlobalMessage"
 import { getApplicationName } from "react-native-device-info"
+import { useNavigation } from "@react-navigation/native"
 
 export const useLoginModel = () => {
-  console.log(getApplicationName())
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const inputRef = useRef<TextInput>()
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
+  const {navigate} = useNavigation()
   
   function handleGuest() {
     dispatch(setIsGuest(true))
+  }
+
+  function handleRegister() {
+    navigate('Register')
   }
 
   async function handleLogin() {
@@ -39,6 +44,7 @@ export const useLoginModel = () => {
     inputRef, 
     loading,
     handleGuest,
-    handleLogin
+    handleLogin,
+    handleRegister
   }
 }
