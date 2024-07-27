@@ -9,7 +9,8 @@ export const Container = styled.View`
   background-color: ${colors.borderGenreColor};
   height: ${RFValue(48)}px;
   border-radius: ${RFValue(8)}px;
-  padding: 0px ${RFValue(16)}px;
+  padding-left: ${RFValue(16)}px;
+  flex-direction: row;
 `;
 
 export const AnimatedLabel = styled(Animated.View)`
@@ -25,13 +26,24 @@ interface InputProps {
 }
 
 export const Input = styled.TextInput<InputProps>`
-  font-size: ${RFValue(15)}px;
+  font-size: ${RFValue(11)}px;
+  line-height: ${RFValue(14)}px;
   font-family: ${fonts.poppinsRegular};
   z-index: ${RFValue(10)}px;
-  width: 100%; 
   height: 100%; 
+  flex: 1;
   justify-content: center; 
   align-items: center;
-  padding-top: ${({showLabel}) => RFValue(showLabel ? 25 : 5)}px;
+  margin-top: ${({showLabel}) => RFValue(showLabel ? 10 : 2)}px;
   padding-left: 0px;
+`;
+
+export const BoxEyeInput = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.5
+})`
+  width: 16%;
+  height: 100%;
+  justify-content: center;
+  align-items: flex-end;
+  padding-right: ${RFValue(16)}px;
 `;

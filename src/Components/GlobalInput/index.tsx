@@ -1,18 +1,20 @@
-import { Animated, Keyboard, TextInput, ViewStyle } from 'react-native'
+import { Animated, Keyboard, TextInput, TouchableOpacity, ViewStyle } from 'react-native'
 import * as S from './styles'
 import themes from '../../Global/themes'
 import { useEffect, useRef, useState } from 'react'
 import { GlobalTextComponent } from '../GlobalTextComponent';
 import { RFValue } from 'react-native-responsive-fontsize';
+import Feather from 'react-native-vector-icons/Feather';
 
 interface GlobalInputProps  {
     value: string;
     onChangeText: (value: string) => void;
     label: string;
-    ref?: React.MutableRefObject<TextInput | undefined>;
+    inputRef?: React.MutableRefObject<TextInput | undefined>;
     onBlur?: () => void;
     onFocus?: () => void;
-    style?: ViewStyle
+    style?: ViewStyle;
+    keyboardType?: 'numeric' | 'email-address';
 }
 
 export const GlobalInput = ({
@@ -21,8 +23,9 @@ export const GlobalInput = ({
     onFocus,
     label,
     onBlur,
-    ref,
-    style
+    inputRef,
+    style,
+    keyboardType
 }: GlobalInputProps) => {
 
     const animatedLabelRef = useRef(new Animated.Value(0)).current;
@@ -35,9 +38,15 @@ export const GlobalInput = ({
         outputRange: [0, 2],
     });
 
+    const [showPassword, setShowPassword] = useState(false)
+
+    function handleShowPassword() {
+        setShowPassword(!showPassword)
+    }
+
     useEffect(() => {
         const keyboard = Keyboard.addListener('keyboardDidHide', () => {
-            ref?.current?.blur()
+            inputRef?.current?.blur()
         })
      
         Animated.timing(animatedLabelRef, {
@@ -49,7 +58,7 @@ export const GlobalInput = ({
         return () => {
             keyboard.remove()
         }
-    }, [animationTop, ref]);
+    }, [animationTop, inputRef]);
 
     return (
         <S.Container style={style}>
@@ -64,7 +73,7 @@ export const GlobalInput = ({
                     <GlobalTextComponent
                         color="lightColor"
                         fontFamily="poppinsRegular"
-                        fontSize={10}
+                        fontSize={11}
                         text={label}
                         alignFontWithMargin
                     />
@@ -74,8 +83,10 @@ export const GlobalInput = ({
                 value={value}
                 showLabel={showLabel}
                 onChangeText={onChangeText}
-                ref={ref}
+                ref={inputRef}
                 editable={true}
+                keyboardType={keyboardType || 'default'}
+                secureTextEntry={keyboardType === 'numeric' && !showPassword}
                 onFocus={() => {
                     setAnimationTop(RFValue(2))
                     if(onFocus) onFocus()
@@ -87,6 +98,11 @@ export const GlobalInput = ({
                 }}
                 cursorColor={colors.disactiveTabBar}
             />
+            {keyboardType === 'numeric' ? (
+                <S.BoxEyeInput onPress={handleShowPassword}>
+                    <Feather name={showPassword ? "eye-off" : "eye"} size={RFValue(18)} color={colors.lightColor} />
+                </S.BoxEyeInput>
+            ): null}
        </S.Container>
     )
 }
