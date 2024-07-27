@@ -29,6 +29,7 @@ export const Input = styled.TextInput<InputProps>`
   font-size: ${RFValue(11)}px;
   line-height: ${RFValue(14)}px;
   font-family: ${fonts.poppinsRegular};
+  color: ${colors.lightColor};
   z-index: ${RFValue(10)}px;
   height: 100%; 
   flex: 1;
