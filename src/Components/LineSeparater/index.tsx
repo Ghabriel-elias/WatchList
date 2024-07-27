@@ -1,5 +1,5 @@
-import { GlobalTextComponent } from '../../../../Components/GlobalTextComponent'
-import themes from '../../../../Global/themes'
+import themes from '../../Global/themes'
+import { GlobalTextComponent } from '../GlobalTextComponent'
 import * as S from './style'
 
 const {colors} = themes

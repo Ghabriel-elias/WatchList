@@ -1,6 +1,6 @@
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
-import themes from "../../../../Global/themes";
+import themes from "../../Global/themes";
 
 const {colors} = themes
 
