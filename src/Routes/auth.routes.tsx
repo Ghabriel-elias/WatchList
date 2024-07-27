@@ -1,12 +1,12 @@
 import { createStackNavigator } from "@react-navigation/stack"
-import { AuthView } from "../Screens/Auth"
+import { Login } from "../Screens/Login"
 
 const Stack = createStackNavigator()   
 
 export const AuthRoutes = () => {
   return (
-    <Stack.Navigator initialRouteName='AuthView' screenOptions={{headerShown: false}}>
-      <Stack.Screen name="AuthView" component={AuthView}/>
+    <Stack.Navigator initialRouteName='Login' screenOptions={{headerShown: false}}>
+      <Stack.Screen name="Login" component={Login}/>
     </Stack.Navigator>
   )
 }
