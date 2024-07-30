@@ -2,19 +2,19 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import Feather from 'react-native-vector-icons/Feather'
 import { Home } from '../Screens/Home'
-import { MoviesFavorites } from '../Screens/Search'
-import { Search } from '../Screens/MoviesFavorites'
 import themes from '../Global/themes'
+import { UserAccount } from '../Screens/User'
+import { SearchShows } from '../Screens/SearchShows'
 
 const icons = {
   Home: {
     name: "home"
   },
-  Search: {
+  SearchShows: {
     name: "search"
   },
-  MoviesFavorites: {
-    name: "bookmark"
+  UserAccount: {
+    name: "user"
   },
 }
 const Tab = createBottomTabNavigator()
@@ -41,9 +41,15 @@ export const TabRoutes = () => {
         }
       })}
     >
-      <Tab.Screen name='Home' component={Home} />
-      <Tab.Screen name='Search' component={Search} />
-      <Tab.Screen name='MoviesFavorites' component={MoviesFavorites} />
+      <Tab.Screen name='Home' options={{
+        title: 'Início'
+      }} component={Home} />
+      <Tab.Screen name='SearchShows' component={SearchShows} options={{
+        title: 'Pesquisar'
+      }} />
+      <Tab.Screen name='UserAccount' component={UserAccount} options={{
+        title: 'Perfil'
+      }}/>
     </Tab.Navigator>
   )
 }
