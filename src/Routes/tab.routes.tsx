@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Feather from 'react-native-vector-icons/Feather'
 import { Home } from '../Screens/Home'
 import themes from '../Global/themes'
-import { UserAccount } from '../Screens/User'
+import { UserAccount } from '../Screens/UserAccount'
 import { SearchShows } from '../Screens/SearchShows'
 
 const icons = {

@@ -1,13 +1,14 @@
-import { View } from "react-native"
+import { Dimensions, View } from "react-native"
 import * as S from './style'
-import { GlobalButton } from "../../Components/GlobalButton"
-import { GlobalTextComponent } from "../../Components/GlobalTextComponent"
 import { HeaderUserGuest } from "./Components/HeaderUserGuest"
 import { useDispatch, useSelector } from "react-redux"
 import { setIsGuest, setUser } from "../../Store/user"
 import { RootState } from "../../Store/store"
-import { colors } from "../../Components/GlobalTextComponent/style"
 import { HeaderUser } from "./Components/HeaderUser"
+import { FlashList } from "@shopify/flash-list"
+import { FooterCopyright } from "./Components/Footer"
+import { RenderItem } from "./Components/RenderItem"
+import { RFValue } from "react-native-responsive-fontsize"
 
 export const UserAccount = () => {
 
@@ -25,13 +26,19 @@ export const UserAccount = () => {
     dispatch(setUser(null))
     dispatch(setIsGuest(false))
   }
-  function getRandomColor() {
-    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-    return `#${randomColor.padStart(6, '0')}`;
-}
+
   return (
     <S.Container>
       {isGuest ? <HeaderUserGuest handleButton={handleLogout} /> : <HeaderUser userName={user?.name || ''}/>}
+      <View style={{flex: 1, padding: 16}}>
+        <FlashList
+          estimatedItemSize={RFValue(48)}
+          estimatedListSize={{height: userOptions.length * RFValue(48), width: Dimensions.get('screen').width}}
+          data={userOptions}
+          renderItem={RenderItem}
+        />
+      </View>
+      <FooterCopyright/>
     </S.Container>
   )
 }

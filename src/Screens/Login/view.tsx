@@ -2,7 +2,6 @@ import { View } from "react-native"
 import { GlobalTextComponent } from "../../Components/GlobalTextComponent"
 import { GlobalInput } from "../../Components/GlobalInput"
 import { GlobalButton } from "../../Components/GlobalButton"
-import { AuthFooter } from "./Components/Footer"
 import * as S from "./style"
 import { LineSeparator } from "../../Components/LineSeparater"
 import { useLoginModel } from "./model"
@@ -70,7 +69,6 @@ export const LoginView = ({
           handleButton={handleGuest}
           style={{marginBottom: 16}}
         />
-        {/* <AuthFooter/> */}
       </S.Container>
     )
 }

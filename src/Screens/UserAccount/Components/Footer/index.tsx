@@ -2,7 +2,7 @@ import { getApplicationName, getVersion } from "react-native-device-info"
 import { GlobalTextComponent } from "../../../../Components/GlobalTextComponent"
 import { ContainerFooter } from "./style"
 
-export const AuthFooter = () => {
+export const FooterCopyright = () => {
   return (
     <ContainerFooter>
       <GlobalTextComponent
