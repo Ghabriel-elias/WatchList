@@ -1,14 +1,14 @@
-import { TypeOfShow } from "../../Screens/Home/types";
+import { GenreProps } from "../../types";
 
 export interface RenderItemHorizontalProps {
   id: number
 }
 
 export interface RenderItemHorizontalList {
-  item: TypeOfShow; 
+  item: GenreProps; 
   renderSkeleton?: boolean;
-  handleRenderItem: (genre: string) => void;
-  selectedOption: {id: number} | null;
+  handleRenderItem: (genre: GenreProps) => void;
+  selectedOption: GenreProps | null;
 }
 
 export interface ContainerOptionsProps {

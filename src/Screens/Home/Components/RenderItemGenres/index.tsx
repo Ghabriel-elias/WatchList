@@ -1,10 +1,10 @@
 import { RFValue } from "react-native-responsive-fontsize";
 import * as S from './style'
 import { RenderItemHorizontalList } from "./model";
-import { GlobalSkeletonComponent } from "../GlobalSkeletonComponent";
-import { GlobalTextComponent } from "../GlobalTextComponent";
+import { GlobalSkeletonComponent } from "../../../../Components/GlobalSkeletonComponent";
+import { GlobalTextComponent } from "../../../../Components/GlobalTextComponent";
 
-export const RenderItemOptions = ({
+export const RenderItemGenres = ({
   selectedOption,
   handleRenderItem,
   item,
@@ -23,7 +23,7 @@ export const RenderItemOptions = ({
   ) : (
     <S.ContainerOption selectedOption={selectedOption?.id === item?.id}
     onPress={() => {
-      handleRenderItem(item.label)
+      handleRenderItem(item)
     }}>
       <GlobalTextComponent
         color={selectedOption?.id === item?.id ? "secundaryColor" : "lightColor"}

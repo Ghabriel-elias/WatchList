@@ -1,6 +1,6 @@
 import { RFValue } from 'react-native-responsive-fontsize'
 import { imageUrl } from '../../../../Global/imageUrl'
-import { RenderItemPopularShowsProps } from '../../model'
+import { RenderItemPopularShowsProps } from '../../types'
 import * as S from './style'
 import { GlobalSkeletonComponent } from '../../../../Components/GlobalSkeletonComponent'
 import { GlobalShadow } from '../../../../Global/Hoc'

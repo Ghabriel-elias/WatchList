@@ -4,7 +4,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { RenderItemOptions } from '../RenderItemOptions';
 import { ListOptionsProps } from './model';
 
-export const ListOptions = ({
+export const ListGenres = ({
   data,
   estimatedItemSize,
   scrollEnabled,

@@ -1,7 +1,7 @@
 import { GlobalTextComponent } from '../../../../Components/GlobalTextComponent'
 import * as S from './style';
 import {FlatList} from 'react-native'
-import { HeaderHomeProps } from '../../model';
+import { HeaderHomeProps } from '../../types';
 
 export const HeaderHome = ({
   handleRenderItem,

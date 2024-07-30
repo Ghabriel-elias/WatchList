@@ -3,7 +3,7 @@ export interface ListOptionsProps {
   estimatedItemSize: number;
   scrollEnabled?: boolean;
   extraData?: any
-  handleRenderItem: (item: any) => void;
+  handleRenderItem: (genre: string) => void;
   selectedOption: any;
   renderSkeleton?: boolean;
   listRef?: any;

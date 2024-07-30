@@ -29,3 +29,7 @@ export const ViewListGenres = styled.View`
   background-color: ${({theme}) => theme.colors.primaryColor}; 
   height: ${RFValue(30)}px;
 `;
+
+export const ViewListOptions = styled.View`
+  height: ${RFValue(30)}px;
+`;

@@ -3,6 +3,7 @@ import { DataSkeletonProps } from "../../Components/GlobalSkeletonComponent/mode
 export interface TypeOfShow {
   id: number;
   name: string;
+  label: 'movies' | 'series';
 }
 
 export interface HeaderHomeProps {
@@ -44,6 +45,7 @@ export interface RenderItemHorizontalList {
 
 
 export interface GenreProps {
-  id: number;
+  id: string;
   name: string;
+  genre: string;
 }

@@ -2,12 +2,12 @@ import { ActivityIndicator, Dimensions, View} from "react-native"
 import { RenderItemListShows } from "./Components/RenderItemListShows";
 import themes from "../../Global/themes";
 import { FlashList } from "@shopify/flash-list";
-import { useHomeViewModel } from "./viewModel";
 import * as S from './style'
 import { HeaderHome } from "./Components/Header";
-import { ListOptions } from "../../Components/ListOptions";
 import LinearGradient from "react-native-linear-gradient";
 import { RFValue } from "react-native-responsive-fontsize";
+import { useHomeController } from "./model";
+import { RenderItemGenres } from "./Components/RenderItemGenres";
 
 export const Home = () => {
   const {
@@ -26,8 +26,9 @@ export const Home = () => {
     listOfTypeShows,
     getMoviesByGenreId,
     handleNavigateShowDetails,
-    listOfGenresRef
-  } = useHomeViewModel()
+    listOfGenresRef,
+    getShows
+  } = useHomeController()
 
   return (
     <S.Container>
@@ -48,16 +49,21 @@ export const Home = () => {
             selectedShow={selectedTypeOfShow}
           />
         </S.ViewHeader>
-        <ListOptions
-          listRef={listOfGenresRef}
-          selectedOption={selectedGenre}
-          data={dataGenres}
-          estimatedItemSize={genreItemSize}
-          handleRenderItem={getMoviesByGenreId}
-          scrollEnabled={!!genres}
-          extraData={[selectedGenre, listOfGenresRef]}
-          renderSkeleton={!genres}
-        />
+        <S.ViewListOptions>
+          <FlashList
+            scrollEnabled={!!genres}
+            estimatedItemSize={RFValue(genreItemSize)}
+            extraData={[selectedGenre, listOfGenresRef]}
+            ref={listOfGenresRef}
+            data={dataGenres}
+            estimatedListSize={{height: RFValue(30), width: dataGenres?.length * RFValue(genreItemSize)}}
+            renderItem={({item}) => RenderItemGenres({item, handleRenderItem: getShows, renderSkeleton: !genres, selectedOption: selectedGenre})}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{paddingLeft: 25}}
+            horizontal
+            ListFooterComponent={<S.ViewListEmptyComponent/>}
+          />   
+        </S.ViewListOptions>
       </LinearGradient>
     </View>
      <View style={{flex: 1, zIndex: -10}}>
