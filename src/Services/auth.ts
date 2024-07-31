@@ -41,6 +41,6 @@ export const register = async (name: string, email: string, password: string): P
     })
     return response.data
   } catch (error: any) {
-    throw new Error(error?.response?.data?.message || 'Erro ao fazer login, por favor tente novamente')
+    throw new Error(error?.response?.data?.message || 'Erro ao tentar se registrar, por favor tente novamente')
   }
 }

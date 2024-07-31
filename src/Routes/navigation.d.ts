@@ -4,6 +4,9 @@ import { ShowProps } from '../Screens/Home/model';
 export type RootStackParamList = {
   ShowsDetails: ShowProps;
   Register: undefined;
+  UserAccount: undefined;
+  EditUserAccount: undefined;
+  Favorites: undefined;
 };
 
 export type NavigationProp = StackNavigationProp<RootStackParamList>;

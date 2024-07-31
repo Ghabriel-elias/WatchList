@@ -5,6 +5,7 @@ import { Home } from '../Screens/Home'
 import themes from '../Global/themes'
 import { UserAccount } from '../Screens/UserAccount'
 import { SearchShows } from '../Screens/SearchShows'
+import { UserRoutes } from './user.routes'
 
 const icons = {
   Home: {
@@ -47,7 +48,7 @@ export const TabRoutes = () => {
       <Tab.Screen name='SearchShows' component={SearchShows} options={{
         title: 'Pesquisar'
       }} />
-      <Tab.Screen name='UserAccount' component={UserAccount} options={{
+      <Tab.Screen name='UserAccount' component={UserRoutes} options={{
         title: 'Perfil'
       }}/>
     </Tab.Navigator>

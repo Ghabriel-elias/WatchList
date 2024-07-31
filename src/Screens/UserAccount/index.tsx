@@ -9,13 +9,17 @@ import { FlashList } from "@shopify/flash-list"
 import { FooterCopyright } from "./Components/Footer"
 import { RenderItem } from "./Components/RenderItem"
 import { RFValue } from "react-native-responsive-fontsize"
+import { useNavigation } from "@react-navigation/native"
 
 export const UserAccount = () => {
 
+  const {navigate} = useNavigation()
+
   const userOptions = [
-    {id: 1, name: 'Editar dados', icon: 'edit'},
-    {id: 2, name: 'Favoritos', icon: 'heart'},
-    {id: 3, name: 'Excluir conta', icon: 'trash-2'},
+    {id: 1, name: 'Editar dados', icon: 'edit', handleRenderItem: () => navigate('EditUserAccount')},
+    {id: 2, name: 'Favoritos', icon: 'heart', handleRenderItem: () => navigate('Favorites')},
+    {id: 3, name: 'Excluir conta', icon: 'trash-2', handleRenderItem: () => 'abrir modal'}, 
+    {id: 4, name: 'Sair', icon: 'log-out', handleRenderItem: () => 'abrir modal'},
   ]
 
   const dispatch = useDispatch()

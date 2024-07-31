@@ -16,7 +16,7 @@ export const RenderItem = ({item}: {item: RenderItemProps}) => {
   const {colors} = themes
 
   return (
-    <S.Container>
+    <S.Container onPress={item.handleRenderItem}>
       <S.ViewIconText>
         <Feather name={item.icon} color={colors.lightColor} size={18}/>
         <GlobalTextComponent
