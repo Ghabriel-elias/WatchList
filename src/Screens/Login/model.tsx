@@ -27,7 +27,7 @@ export const useLoginModel = () => {
     try {
       setLoading(true)
       const {token, user} = await login(email, password)
-      dispatch(setUser({...user, token}))
+      dispatch(setUser({...user, token: `Bearer ${token}`}))
     } catch (error: any) {
       const catchError = error.message
       globalMessage({message: catchError, type: 'danger'})
