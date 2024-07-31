@@ -25,13 +25,13 @@ export const GlobalInput = ({
     onBlur,
     inputRef,
     style,
-    keyboardType
+    keyboardType,
 }: GlobalInputProps) => {
 
     const animatedLabelRef = useRef(new Animated.Value(0)).current;
 
-    const {colors, fonts} = themes
-    const [showLabel, setShowLabel] = useState(true)
+    const {colors} = themes
+    const [showLabel, setShowLabel] = useState(value === '')
     const [animationTop, setAnimationTop] = useState(RFValue(5))
     const translateY = animatedLabelRef.interpolate({
         inputRange: [0, 1],
