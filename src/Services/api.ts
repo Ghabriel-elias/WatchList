@@ -27,17 +27,4 @@ export async function getShowsByGenreRequest(typeOfShow: 'movies' | 'series', ge
   }
 }
 
-export async function deleteUserRequest(token: string) {
-  try {
-    const {data} = await api.delete('/auth/delete', {
-      headers: {
-        Authorization: token
-      }
-    })
-    return data
-  } catch (error: any) {
-    throw new Error(error?.response?.data?.message || 'Erro ao buscar gêneros, por favor tente novamente')
-  }
-}
-
 export default api

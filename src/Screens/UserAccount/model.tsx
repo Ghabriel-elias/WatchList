@@ -4,7 +4,7 @@ import { RootState } from "../../Store/store"
 import { useNavigation } from "@react-navigation/native"
 import { Modalize } from "react-native-modalize"
 import { useRef, useState } from "react"
-import { deleteUserRequest } from "../../Services/api"
+import { deleteUserRequest } from "../../Services/auth"
 import { globalMessage } from "../Functions/useGlobalMessage"
 
 export const useControllerUser = () => {
