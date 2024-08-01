@@ -54,7 +54,7 @@ export async function deleteUserRequest(token: string) {
     })
     return data
   } catch (error: any) {
-    throw new Error(error?.response?.data?.message || 'Erro ao buscar gêneros, por favor tente novamente')
+    throw new Error(error?.response?.data?.message || 'Erro ao deletar usuário, por favor tente novamente')
   }
 }
 
