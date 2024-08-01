@@ -4,6 +4,9 @@ import * as S from './style'
 export const HeaderUser = ({
   userName
 }: {userName: string}) => {
+
+  const userInitialLetters = `${userName?.substring(0,1)}${userName?.split(' ')[1]?.substring(0, 1) || ''}`
+
   return (
     <S.Container>
       <S.ViewInitialLetters>
@@ -11,7 +14,7 @@ export const HeaderUser = ({
           color="lightColor"
           fontFamily="poppinsSemiBold"
           fontSize={14}
-          text={`${userName?.substring(0,1)}${userName?.split(' ')[1]?.substring(0, 1) || ''}`}
+          text={userInitialLetters.toUpperCase()}
         />
       </S.ViewInitialLetters>
       <GlobalTextComponent
