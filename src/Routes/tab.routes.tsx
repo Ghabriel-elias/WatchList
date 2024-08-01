@@ -36,6 +36,7 @@ export const TabRoutes = () => {
           height: 55,
           paddingBottom: 5
         },
+        tabBarHideOnKeyboard: true,
         tabBarIcon: ({ size, focused }) => {
           const { name } = icons[route.name]
           return <Feather name={name} size={size} color={focused ? colors.secundaryColor : colors.disactiveTabBar} />
