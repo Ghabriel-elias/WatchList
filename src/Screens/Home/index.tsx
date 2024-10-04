@@ -29,7 +29,8 @@ export const Home = () => {
     listOfGenresRef,
     popularShows,
     dataForSkeletonRender,
-    listOfPopularShowsRef
+    listOfPopularShowsRef,
+    handleSearch
   } = useHomeViewModel()
 
   return (
@@ -37,6 +38,7 @@ export const Home = () => {
     <View>
       <HeaderHome
         handleRenderItem={changeTypeOfShow}
+        handleSearch={handleSearch}
         listOfShows={listOfTypeShows}
         selectedShow={selectedTypeOfShow}
       />

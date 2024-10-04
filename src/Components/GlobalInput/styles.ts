@@ -15,7 +15,6 @@ export const Container = styled.View`
 
 export const AnimatedLabel = styled(Animated.View)`
   padding-left: ${RFValue(16)}px;
-  z-index: 0px;
   height: 100%;
   width: 100%;
   position: absolute;
@@ -27,10 +26,9 @@ interface InputProps {
 
 export const Input = styled.TextInput<InputProps>`
   font-size: ${RFValue(11)}px;
-  line-height: ${RFValue(14)}px;
   font-family: ${fonts.poppinsRegular};
   color: ${colors.lightColor};
-  z-index: ${RFValue(10)}px;
+  z-index: 10;
   height: 100%; 
   flex: 1;
   justify-content: center; 

@@ -29,20 +29,14 @@ export const MediaHubDetails = () => {
   } = useMediaHubDetailsController()
 
   const renderItemIconWatchProvider = ({item}: any) => (
-    <Image
+    <S.ImageWatchProvider
       defaultSource={require('../../Assets/defaultImage.jpg')}
-      style={{
-        width: 40,
-        height: 40,
-        marginRight: 8,
-        borderRadius: 4
-      }}
       source={{uri: `${imageUrl}${item?.logo_path}`}}
     />
   )
 
   const renderItemWatchProvider = ({item}: any) => (
-    <View style={{marginBottom: 16}}>
+    <S.BoxListWatchProvider>
       <GlobalTextComponent
         color="lightColor"
         fontFamily="poppinsSemiBold"
@@ -55,22 +49,16 @@ export const MediaHubDetails = () => {
         horizontal
         renderItem={renderItemIconWatchProvider}
       />     
-    </View>
+    </S.BoxListWatchProvider>
   )
 
   const renderItemCast = ({item}: any) => (
     <View>
-      <Image
+      <S.ImageCast
         defaultSource={require('../../Assets/defaultImage.jpg')}
-        style={{
-          width: 80,
-          height: 80,
-          marginRight: 8,
-          borderRadius: 4
-        }}
         source={{uri: `${imageUrl}${item?.profile_path}`}}
       />
-      <View style={{marginTop: 8, width: 80}}>
+      <S.BoxCast>
         <GlobalTextComponent
           color="lightColor"
           fontFamily="poppinsMedium"
@@ -86,7 +74,7 @@ export const MediaHubDetails = () => {
           text={item?.character}
           numberOfLines={2}
         />
-      </View>
+      </S.BoxCast>
     </View>
   )
 
@@ -132,7 +120,7 @@ export const MediaHubDetails = () => {
           <GlobalTextComponent
             color="lightColor"
             fontFamily="poppinsMedium"
-            fontSize={14}
+            fontSize={12}
             text={`${mediaHub?.overview}`}
             style={{paddingBottom: 16}}
           />

@@ -21,6 +21,42 @@ export async function getGenres(showType: 'movie' | 'tv') {
   }
 }
 
+export async function searchMediaHub(term: string) {
+  try {
+    const queryMovies = `/search/movie`
+    const querySeries = `/search/tv`
+    const responseMovies = await api.get(queryMovies, {
+      params: {
+        api_key: apikey,
+        query: term
+      }
+    })
+    const responseSeries = await api.get(querySeries, {
+      params: {
+        api_key: apikey,
+        query: term
+      }
+    })
+    return {movies: responseMovies?.data?.results, series: responseSeries?.data?.results}
+  } catch (error: any) {
+    throw new Error(error?.response?.data?.message || 'Erro ao buscar gêneros, por favor tente novamente')
+  }
+}
+
+export async function getTrendingMediaRequest() {
+  try {
+    const query = `/trending/movie/day?language=pt-BR`
+    const response = await api.get(query, {
+      params: {
+        api_key: apikey,
+      }
+    })
+    return response?.data
+  } catch (error: any) {
+    throw new Error(error?.response?.data?.message || 'Erro ao buscar gêneros, por favor tente novamente')
+  }
+}
+
 export async function getWatchProvidersRequest(typeOfShow: 'movie' | 'tv', mediaHubId: number) {
   try {
     const query = `/${typeOfShow}/${mediaHubId}/watch/providers?language=pt-BR`

@@ -10,11 +10,14 @@ interface GlobalInputProps  {
     value: string;
     onChangeText: (value: string) => void;
     label: string;
+    autoFocus?: boolean;
     inputRef?: React.MutableRefObject<TextInput | undefined>;
     onBlur?: () => void;
     onFocus?: () => void;
     style?: ViewStyle;
     keyboardType?: 'numeric' | 'email-address';
+    inputType?: 'numeric' | 'email' | 'password' | 'search';
+    handleIcon?: () => void;
 }
 
 export const GlobalInput = ({
@@ -26,18 +29,12 @@ export const GlobalInput = ({
     inputRef,
     style,
     keyboardType,
+    inputType,
+    handleIcon,
+    autoFocus
 }: GlobalInputProps) => {
 
-    const animatedLabelRef = useRef(new Animated.Value(0)).current;
-
     const {colors} = themes
-    const [showLabel, setShowLabel] = useState(value === '')
-    const [animationTop, setAnimationTop] = useState(RFValue(5))
-    const translateY = animatedLabelRef.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, 2],
-    });
-
     const [showPassword, setShowPassword] = useState(false)
 
     function handleShowPassword() {
@@ -49,58 +46,39 @@ export const GlobalInput = ({
             inputRef?.current?.blur()
         })
      
-        Animated.timing(animatedLabelRef, {
-          toValue: animationTop,
-          duration: 200,
-          useNativeDriver: true,
-        }).start()
-        
         return () => {
             keyboard.remove()
         }
-    }, [animationTop, inputRef]);
+    }, [inputRef]);
 
     return (
         <S.Container style={style}>
-            {showLabel  ? (
-                <S.AnimatedLabel  
-                  style={{
-                    transform: [{
-                      translateY: translateY
-                    }],
-                   top: animationTop
-                  }}>
-                    <GlobalTextComponent
-                        color="lightColor"
-                        fontFamily="poppinsRegular"
-                        fontSize={11}
-                        text={label}
-                        alignFontWithMargin
-                    />
-                </S.AnimatedLabel>
-            ): null}
             <S.Input
                 value={value}
-                showLabel={showLabel}
                 onChangeText={onChangeText}
                 ref={inputRef}
+                placeholder={label}
+                placeholderTextColor={colors.lightColor}
                 editable={true}
+                autoFocus={autoFocus}
                 keyboardType={keyboardType || 'default'}
-                secureTextEntry={keyboardType === 'numeric' && !showPassword}
+                secureTextEntry={inputType && inputType === 'password' && !showPassword}
                 onFocus={() => {
-                    setAnimationTop(RFValue(2))
                     if(onFocus) onFocus()
                 }}
                 onBlur={() => {
-                    setShowLabel(value === '')
-                    setAnimationTop(RFValue(5))                
                     if(onBlur) onBlur()
                 }}
                 cursorColor={colors.disactiveTabBar}
             />
-            {keyboardType === 'numeric' ? (
+            {inputType && inputType === 'password' ? (
                 <S.BoxEyeInput onPress={handleShowPassword}>
                     <Feather name={showPassword ? "eye-off" : "eye"} size={RFValue(18)} color={colors.lightColor} />
+                </S.BoxEyeInput>
+            ): null}
+            {inputType && inputType === 'search' && value.length >= 3 ? (
+                <S.BoxEyeInput onPress={handleIcon && handleIcon}>
+                    <Feather name={"x"} size={RFValue(18)} color={colors.lightColor} />
                 </S.BoxEyeInput>
             ): null}
        </S.Container>

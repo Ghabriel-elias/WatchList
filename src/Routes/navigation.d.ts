@@ -4,6 +4,7 @@ import { ShowProps } from '../Screens/Home/model';
 export type RootStackParamList = {
   MediaHubDetails: ShowProps;
   Favorites: undefined;
+  Search: undefined;
 };
 
 export type NavigationProp = StackNavigationProp<RootStackParamList>;

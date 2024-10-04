@@ -6,12 +6,13 @@ import { HeaderHomeProps } from '../../types';
 export const HeaderHome = ({
   handleRenderItem,
   selectedShow,
-  listOfShows
+  listOfShows,
+  handleSearch
 }: HeaderHomeProps) => {
 
   return (
     <S.Container>
-      <S.FakeInput activeOpacity={0.5}>
+      <S.FakeInput onPress={handleSearch} activeOpacity={0.5}>
         <GlobalTextComponent
           color='lightColor'
           fontFamily='poppinsLight'

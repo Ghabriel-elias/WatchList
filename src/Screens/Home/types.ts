@@ -9,6 +9,7 @@ export interface TypeOfShow {
 export interface HeaderHomeProps {
   handleRenderItem: (item: TypeOfShow) => Promise<void>;
   selectedShow: TypeOfShow;
+  handleSearch: () => void;
   listOfShows: TypeOfShow[];
 }
 

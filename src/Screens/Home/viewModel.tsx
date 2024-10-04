@@ -62,6 +62,10 @@ export const useHomeViewModel = () => {
     }
   }
 
+  function handleSearch() {
+    navigate('Search')
+  }
+
   function clearStates() {
     setListOfShows(null)
     setPageMovieList(1)
@@ -83,7 +87,6 @@ export const useHomeViewModel = () => {
     const verifyTypeOfShow = typeOfShow ? typeOfShow : selectedTypeOfShow?.name === 'Filmes' ? 'movie' : 'tv'
     const verifyPage = page ? page : pageMovieList
     if(!page) {
-      listOfShowsRef.current?.scrollToOffset({animated: true, offset: 0})
       setListOfShows(null)
       setSelectedGenre(item)
     }
@@ -146,6 +149,7 @@ export const useHomeViewModel = () => {
     handleNavigateShowDetails,
     popularShows,
     dataForSkeletonRender,
-    listOfPopularShowsRef
+    listOfPopularShowsRef,
+    handleSearch
   }
 }

@@ -18,6 +18,13 @@ export const Header = styled.View`
   z-index: 2000;
 `;
 
+export const ImageWatchProvider = styled.Image`
+  width: ${RFValue(40)}px;
+  height: ${RFValue(40)}px;
+  margin-right: ${RFValue(8)}px;
+  border-radius: ${RFValue(4)}px;
+`;
+
 export const CoverImage = styled.Image`
   height: ${RFValue(200)}px;
   width: 100%;
@@ -26,6 +33,22 @@ export const CoverImage = styled.Image`
 export const MovieInfo = styled.View`
   flex: 1;
   padding: ${RFValue(12)}px;
+`;
+
+export const BoxListWatchProvider = styled.View`
+  margin-bottom: ${RFValue(16)}px;
+`;
+
+export const ImageCast = styled.Image`
+  width: ${RFValue(80)}px;
+  height: ${RFValue(80)}px;
+  margin-right: ${RFValue(8)}px;
+  border-radius: ${RFValue(4)}px;
+`;
+
+export const BoxCast = styled.View`
+  margin-top: ${RFValue(8)}px;
+  width: ${RFValue(80)}px;
 `;
 
 export const BoxMediaHubPlayer = styled.View`
