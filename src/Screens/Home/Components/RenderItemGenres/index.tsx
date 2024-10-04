@@ -15,7 +15,7 @@ export const RenderItemGenres = ({
     <GlobalSkeletonComponent
       customStyle={{
         marginRight: RFValue(12),
-        height: RFValue(15),
+        height: RFValue(30),
         borderRadius: RFValue(4),
         width: RFValue(75),
       }}
@@ -26,7 +26,7 @@ export const RenderItemGenres = ({
       handleRenderItem(item)
     }}>
       <GlobalTextComponent
-        color={selectedOption?.id === item?.id ? "secundaryColor" : "lightColor"}
+        color={selectedOption?.id === item?.id ? "lightColor" : "secundaryColor"}
         fontFamily="poppinsMedium"
         fontSize={14}
         text={item?.name}

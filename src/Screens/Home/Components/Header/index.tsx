@@ -11,13 +11,14 @@ export const HeaderHome = ({
 
   return (
     <S.Container>
-      <GlobalTextComponent
-        color='lightColor'
-        fontFamily='poppinsSemiBold'
-        fontSize={18}
-        text='O que você quer assistir hoje?'
-        style={{marginBottom: 10}}
-      />
+      <S.FakeInput activeOpacity={0.5}>
+        <GlobalTextComponent
+          color='lightColor'
+          fontFamily='poppinsLight'
+          fontSize={11}
+          text='Buscar...'
+        />
+      </S.FakeInput>
       <FlatList
         data={listOfShows}
         horizontal

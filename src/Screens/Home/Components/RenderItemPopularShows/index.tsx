@@ -17,7 +17,9 @@ export const RenderItemPopularShows = ({item, handleRenderItem, renderSkeleton}:
       }}
     />
   ): (
-    <S.ViewRenderItem onPress={handleRenderItem}>
+    <S.ViewRenderItem onPress={() => {
+      handleRenderItem(item)
+    }}>
       <S.MovieImage
         defaultSource={require('../../../../Assets/defaultImage.jpg')}
         source={{uri: `${imageUrl}${item?.poster_path}`}}

@@ -4,12 +4,22 @@ import styled from "styled-components/native";
 export const Container = styled.View`
   width: 100%;
   justify-content: center;
-  margin: ${RFValue(20)}px;
+  padding: ${RFValue(20)}px;
+  padding-bottom: ${RFValue(10)}px;
 `;
 
 export interface StyleRenderItemProps {
   selected: boolean;
 }
+
+export const FakeInput = styled.TouchableOpacity`
+  height: ${RFValue(40)}px;
+  background-color: ${({theme}) => theme.colors.borderGenreColor};
+  border-radius: ${RFValue(8)}px;
+  margin-bottom: ${RFValue(16)}px;
+  justify-content: center;
+  padding-left: ${RFValue(16)}px;
+`;
 
 export const ButtonRenderItem = styled.TouchableOpacity.attrs({
   activeOpacity: 0.5,

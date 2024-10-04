@@ -6,13 +6,14 @@ import themes from '../Global/themes'
 import { UserAccount } from '../Screens/UserAccount'
 import { SearchShows } from '../Screens/SearchShows'
 import { UserRoutes } from './user.routes'
+import { Favorites } from '../Screens/Favorites'
 
 const icons = {
   Home: {
     name: "home"
   },
-  SearchShows: {
-    name: "search"
+  Favorites: {
+    name: "heart"
   },
   UserAccount: {
     name: "user"
@@ -46,12 +47,12 @@ export const TabRoutes = () => {
       <Tab.Screen name='Home' options={{
         title: 'Início'
       }} component={Home} />
-      <Tab.Screen name='SearchShows' component={SearchShows} options={{
-        title: 'Pesquisar'
+      <Tab.Screen name='Favorites' component={Favorites} options={{
+        title: 'Favoritos'
       }} />
-      <Tab.Screen name='UserAccount' component={UserRoutes} options={{
+      {/* <Tab.Screen name='UserAccount' component={UserRoutes} options={{
         title: 'Perfil'
-      }}/>
+      }}/> */}
     </Tab.Navigator>
   )
 }

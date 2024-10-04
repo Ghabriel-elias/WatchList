@@ -7,7 +7,7 @@ const {colors, fonts} = themes
 
 export const Container = styled.View`
   background-color: ${colors.borderGenreColor};
-  height: ${RFValue(48)}px;
+  height: ${RFValue(40)}px;
   border-radius: ${RFValue(8)}px;
   padding-left: ${RFValue(16)}px;
   flex-direction: row;

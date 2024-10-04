@@ -2,10 +2,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import { ShowProps } from '../Screens/Home/model';
 
 export type RootStackParamList = {
-  ShowsDetails: ShowProps;
-  Register: undefined;
-  UserAccount: undefined;
-  EditUserAccount: undefined;
+  MediaHubDetails: ShowProps;
   Favorites: undefined;
 };
 

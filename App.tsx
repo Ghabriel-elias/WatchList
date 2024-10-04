@@ -6,8 +6,8 @@ import {SafeAreaView, StatusBar} from 'react-native'
 import { persistor, store } from './src/Store/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { Routes } from './src/Routes';
 import FlashMessage from 'react-native-flash-message';
+import { AppRoutes } from './src/Routes/app.routes';
 
 function App(): React.JSX.Element {
 
@@ -19,7 +19,7 @@ function App(): React.JSX.Element {
         <PersistGate persistor={persistor} loading={null}>
           <ThemeProvider theme={themes}>
             <NavigationContainer>
-              <Routes/>
+              <AppRoutes/>
               <FlashMessage statusBarHeight={statusBarHeight}/>
             </NavigationContainer>
           </ThemeProvider>

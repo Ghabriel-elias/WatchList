@@ -1,7 +1,7 @@
 import api from "../../Services/api"
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { GenreProps, ShowProps, TypeOfShow } from "./model";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 const dataForSkeletonRender = [
   {id: 0},
@@ -47,18 +47,28 @@ export const useHomeViewModel = () => {
   const genreItemSize = 193
   const listOfShowsRef = useRef<any>(null);
   const listOfGenresRef = useRef<any>(null);
+  const listOfPopularShowsRef = useRef<any>(null);
   
   async function requestShowByType(typeOfShow: 'MOVIE' | 'TV_SERIES') {
-    // const queryPopularShows = `/${typeOfShow === 'MOVIE' ? 'movie': 'tv'}/popular?language=pt-BR&page=1`
+    const queryPopularShows = `/${typeOfShow === 'MOVIE' ? 'movie': 'tv'}/popular?language=pt-BR&page=1`
     const queryGenres = `/genre/${typeOfShow === 'MOVIE' ? 'movie': 'tv'}/list?language=pt-BR`
-    const responseGenres = await api.get(queryGenres)
-    // const responsePopularShows = await api.get(queryPopularShows)
-    // if (responsePopularShows && responseGenres) {
-    if (responseGenres) {
-      setGenres(responseGenres?.data?.genres)
-      // setPopularShows(responsePopularShows?.data?.results)
-      setSelectedGenre(responseGenres?.data?.genres[0])
-      await getMoviesByGenreId(responseGenres?.data?.genres[0], typeOfShow)
+    const responseGenres = await api.get(queryGenres, {
+      params: {
+        api_key: '00ffa5a0a1e1185fb85db6a05cfd38b8'
+      }
+    })
+    const responsePopularShows = await api.get(queryPopularShows, {
+      params: {
+        api_key: '00ffa5a0a1e1185fb85db6a05cfd38b8'
+      }
+    })
+    if (responsePopularShows && responseGenres) {
+      if (responseGenres) {
+        setGenres(responseGenres?.data?.genres)
+        setPopularShows(responsePopularShows?.data?.results)
+        setSelectedGenre(responseGenres?.data?.genres[0])
+        await getMoviesByGenreId(responseGenres?.data?.genres[0], typeOfShow)
+      }
     }
   }
 
@@ -66,13 +76,14 @@ export const useHomeViewModel = () => {
     setListOfShows(null)
     setPageMovieList(1)
     setLoadingMovieList(false)
-    // setPopularShows(null)
+    setPopularShows(null)
     setGenres(null)
   }
 
   async function changeTypeOfShow(item: TypeOfShow) {
     listOfShowsRef.current?.scrollToOffset({animated: true, offset: 0})
     listOfGenresRef.current?.scrollToOffset({animated: true, offset: 0})
+    listOfPopularShowsRef.current?.scrollToOffset({animated: true, offset: 0})
     clearStates()
     setSelectedTypeOfShow(item)
     await requestShowByType(item.name === 'Filmes' ? 'MOVIE' : 'TV_SERIES')
@@ -87,10 +98,23 @@ export const useHomeViewModel = () => {
       setSelectedGenre(item)
     }
     const query = `/discover/${verifyTypeOfShow === 'MOVIE' ? 'movie' : 'tv'}?language=pt-BR&page=${verifyPage}&with_genres=${item?.id}`
-    const responseDiscoverShows = await api.get(query)
+    const responseDiscoverShows = await api.get(query, {
+      params: {
+        api_key: '00ffa5a0a1e1185fb85db6a05cfd38b8'
+      }
+    })
     if(responseDiscoverShows) {
       if(!page) {
+        const getGenreId = genres?.findIndex((genre) => genre?.id === item?.id)
         setListOfShows(responseDiscoverShows?.data?.results)
+        if(getGenreId && getGenreId != -1) {
+          listOfGenresRef.current?.scrollToIndex({
+            index: getGenreId - 1,
+            viewOffset: 0,
+            viewPosition: 0,
+            animated: true
+          })
+        }
       } else {
         setListOfShows([
           ...listOfShows,
@@ -102,7 +126,7 @@ export const useHomeViewModel = () => {
   }
 
   function handleNavigateShowDetails(item: ShowProps) {
-    navigate('ShowsDetails', item)
+    navigate('MediaHubDetails', {item, selectedTypeOfShow: selectedTypeOfShow?.name === 'Filmes' ? 'movie' : 'tv'})
   }
 
   const handleEndReached = async () => {
@@ -134,6 +158,9 @@ export const useHomeViewModel = () => {
     selectedGenre,
     listOfTypeShows,
     getMoviesByGenreId,
-    handleNavigateShowDetails
+    handleNavigateShowDetails,
+    popularShows,
+    dataForSkeletonRender,
+    listOfPopularShowsRef
   }
 }

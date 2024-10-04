@@ -1,5 +1,5 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
-import user from './user'
+import favorites from './favorites'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistReducer, persistStore } from 'redux-persist';
 
@@ -9,7 +9,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  user: user,
+  favorites: favorites
 });
 
 export const persistedReducer = persistReducer(persistConfig, rootReducer);
