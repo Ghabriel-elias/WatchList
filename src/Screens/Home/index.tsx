@@ -24,7 +24,7 @@ export const Home = () => {
     loadingMovieList,
     selectedGenre,
     listOfTypeShows,
-    getMoviesByGenreId,
+    getMediaHub,
     handleNavigateShowDetails,
     listOfGenresRef,
     popularShows,
@@ -74,7 +74,7 @@ export const Home = () => {
                   data={dataGenres}
                   extraData={[selectedGenre, listOfGenresRef]}
                   estimatedListSize={{height: RFValue(30), width: dataGenres?.length * RFValue(genreItemSize)}}
-                  renderItem={({item}) => RenderItemGenres({item, handleRenderItem: getMoviesByGenreId, renderSkeleton: !genres, selectedOption: selectedGenre})}
+                  renderItem={({item}) => RenderItemGenres({item, handleRenderItem: getMediaHub, renderSkeleton: !genres, selectedOption: selectedGenre})}
                   showsHorizontalScrollIndicator={false}
                   horizontal
                 />   

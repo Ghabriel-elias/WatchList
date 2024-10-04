@@ -1,7 +1,7 @@
-import api from "../../Services/api"
-import { useCallback, useEffect, useRef, useState } from "react";
+import { getGenres, getMediaHubByGenreId, getPopularShows } from "../../Services/api"
+import { useEffect, useRef, useState } from "react";
 import { GenreProps, ShowProps, TypeOfShow } from "./model";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 const dataForSkeletonRender = [
   {id: 0},
@@ -49,23 +49,15 @@ export const useHomeViewModel = () => {
   const listOfGenresRef = useRef<any>(null);
   const listOfPopularShowsRef = useRef<any>(null);
   
-  async function requestShowByType(typeOfShow: 'MOVIE' | 'TV_SERIES') {
-    const queryPopularShows = `/${typeOfShow === 'MOVIE' ? 'movie': 'tv'}/popular?language=pt-BR&page=1`
-    const queryGenres = `/genre/${typeOfShow === 'MOVIE' ? 'movie': 'tv'}/list?language=pt-BR`
-    const responseGenres = await api.get(queryGenres, {
-      params: {
-      }
-    })
-    const responsePopularShows = await api.get(queryPopularShows, {
-      params: {
-      }
-    })
+  async function requestShowByType(typeOfShow: 'movie' | 'tv') {
+    const responseGenres = await getGenres(typeOfShow)
+    const responsePopularShows = await getPopularShows(typeOfShow)
     if (responsePopularShows && responseGenres) {
       if (responseGenres) {
-        setGenres(responseGenres?.data?.genres)
-        setPopularShows(responsePopularShows?.data?.results)
-        setSelectedGenre(responseGenres?.data?.genres[0])
-        await getMoviesByGenreId(responseGenres?.data?.genres[0], typeOfShow)
+        setGenres(responseGenres?.genres)
+        setPopularShows(responsePopularShows?.results)
+        setSelectedGenre(responseGenres?.genres[0])
+        await getMediaHub(responseGenres?.genres[0], typeOfShow)
       }
     }
   }
@@ -84,26 +76,22 @@ export const useHomeViewModel = () => {
     listOfPopularShowsRef.current?.scrollToOffset({animated: true, offset: 0})
     clearStates()
     setSelectedTypeOfShow(item)
-    await requestShowByType(item.name === 'Filmes' ? 'MOVIE' : 'TV_SERIES')
+    await requestShowByType(item.name === 'Filmes' ? 'movie' : 'tv')
   }
 
-  async function getMoviesByGenreId(item: any, typeOfShow?: 'MOVIE' | 'TV_SERIES', page?: number) {
-    const verifyTypeOfShow = typeOfShow ? typeOfShow : selectedTypeOfShow?.name === 'Filmes' ? 'MOVIE' : 'TV_SERIES'
+  async function getMediaHub(item: any, typeOfShow?: 'movie' | 'tv', page?: number) {
+    const verifyTypeOfShow = typeOfShow ? typeOfShow : selectedTypeOfShow?.name === 'Filmes' ? 'movie' : 'tv'
     const verifyPage = page ? page : pageMovieList
     if(!page) {
       listOfShowsRef.current?.scrollToOffset({animated: true, offset: 0})
       setListOfShows(null)
       setSelectedGenre(item)
     }
-    const query = `/discover/${verifyTypeOfShow === 'MOVIE' ? 'movie' : 'tv'}?language=pt-BR&page=${verifyPage}&with_genres=${item?.id}`
-    const responseDiscoverShows = await api.get(query, {
-      params: {
-      }
-    })
-    if(responseDiscoverShows) {
+    const responseMediaHub = await getMediaHubByGenreId(verifyTypeOfShow, verifyPage, item?.id)
+    if(responseMediaHub) {
       if(!page) {
         const getGenreId = genres?.findIndex((genre) => genre?.id === item?.id)
-        setListOfShows(responseDiscoverShows?.data?.results)
+        setListOfShows(responseMediaHub?.results)
         if(getGenreId && getGenreId != -1) {
           listOfGenresRef.current?.scrollToIndex({
             index: getGenreId - 1,
@@ -115,7 +103,7 @@ export const useHomeViewModel = () => {
       } else {
         setListOfShows([
           ...listOfShows,
-          ...responseDiscoverShows?.data?.results
+          ...responseMediaHub?.results
         ])
         setLoadingMovieList(false)
       }
@@ -131,12 +119,12 @@ export const useHomeViewModel = () => {
     setLoadingMovieList(true) 
     setPageMovieList(prev => prev + 1)
     const page = pageMovieList + 1
-    const typeShowVerify = selectedTypeOfShow.name === 'Filmes' ? 'MOVIE' : 'TV_SERIES'
-    await getMoviesByGenreId(selectedGenre, typeShowVerify, page)
+    const typeShowVerify = selectedTypeOfShow.name === 'Filmes' ? 'movie' : 'tv'
+    await getMediaHub(selectedGenre, typeShowVerify, page)
   };
 
   useEffect(() => {
-    requestShowByType('MOVIE')
+    requestShowByType('movie')
   }, [])
 
   return {
@@ -154,7 +142,7 @@ export const useHomeViewModel = () => {
     loadingMovieList,
     selectedGenre,
     listOfTypeShows,
-    getMoviesByGenreId,
+    getMediaHub,
     handleNavigateShowDetails,
     popularShows,
     dataForSkeletonRender,

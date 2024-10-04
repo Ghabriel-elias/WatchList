@@ -1,7 +1,7 @@
 import { useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Store/store";
-import api from "../../Services/api";
+import api, { getCastRequest, getMediaHubDetailsRequest, getVideosRequest, getWatchProvidersRequest } from "../../Services/api";
 import { useCallback, useState } from "react";
 import { addFavorite, removeFavorite } from "../../Store/favorites";
 import dayjs from "dayjs";
@@ -24,47 +24,31 @@ export const useMediaHubDetailsController = () => {
   const keysWatchProviders = [...Object.keys(watchProviders)]?.filter(key => key != 'link')
 
   async function getMediaHubDetail() {
-    const queryGenres = `/${typeOfShow}/${mediaHubId}?language=pt-BR`
-    const response = await api.get(queryGenres, {
-      params: {
-      }
-    })
-    if (response?.data) {
-      setMediaHub(response?.data)
+    const response = await getMediaHubDetailsRequest(typeOfShow, mediaHubId)
+    if (response) {
+      setMediaHub(response)
     }
   }
 
   async function getWatchProviders() {
-    const queryGenres = `/${typeOfShow}/${mediaHubId}/watch/providers?language=pt-BR`
-    const response = await api.get(queryGenres, {
-      params: {
-      }
-    })
-    const watchProvidersBr = response?.data?.results['BR']
+    const response = await getWatchProvidersRequest(typeOfShow, mediaHubId)
+    const watchProvidersBr = response?.results['BR']
     if (watchProvidersBr) {
       setWatchProviders(watchProvidersBr)
     }
   }
 
   async function getCast() {
-    const queryGenres = `/${typeOfShow}/${mediaHubId}/credits`
-    const response = await api.get(queryGenres, {
-      params: {
-      }
-    })
-    if (response?.data?.cast) {
-      setCast(response?.data?.cast)
+    const response = await getCastRequest(typeOfShow, mediaHubId)
+    if (response?.cast) {
+      setCast(response?.cast)
     }
   }
 
   async function getVideos() {
-    const queryGenres = `/${typeOfShow}/${mediaHubId}/videos`
-    const response = await api.get(queryGenres, {
-      params: {
-      }
-    })
-    if (response?.data?.results) {
-      setVideos(response?.data?.results)
+    const response = await getVideosRequest(typeOfShow, mediaHubId)
+    if (response?.results) {
+      setVideos(response?.results)
     }
   }
 
