@@ -25,7 +25,8 @@ export const MediaHubDetails = () => {
     favoriteShow,
     keysWatchProviders,
     cast,
-    watchProviders
+    watchProviders,
+    notRelease
   } = useMediaHubDetailsController()
 
   const renderItemIconWatchProvider = ({item}: any) => (
@@ -96,18 +97,20 @@ export const MediaHubDetails = () => {
             fontFamily="poppinsSemiBold"
             fontSize={18}
             text={mediaHub?.title || mediaHub?.name}
-            style={{marginTop: 4, flex: 1}}
+            style={{marginTop: 4, width: '75%'}}
           />
-          <S.BoxStar>
-            <MaterialCommunityIcons name={'star'} size={RFValue(20)} color={'#FF3'}/>
-            <GlobalTextComponent
-              color="lightColor"
-              fontFamily="poppinsMedium"
-              fontSize={14}
-              text={`${mediaHub?.vote_average?.toFixed(1)}/10`}
-              style={{marginTop: 4, paddingLeft: 6}}
-            />
-          </S.BoxStar>
+          {notRelease ? null : (
+            <S.BoxStar>
+              <MaterialCommunityIcons name={'star'} size={RFValue(20)} color={'#FF3'}/>
+              <GlobalTextComponent
+                color="lightColor"
+                fontFamily="poppinsMedium"
+                fontSize={14}
+                text={`${mediaHub?.vote_average?.toFixed(1)}/10`}
+                style={{marginTop: 6, paddingLeft: 6}}
+              />
+            </S.BoxStar>
+          )}
         </S.BoxTitle>
         <GlobalTextComponent
           color="lightColor"

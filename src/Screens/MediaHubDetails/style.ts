@@ -57,12 +57,10 @@ export const BoxMediaHubPlayer = styled.View`
 
 export const BoxStar = styled.View`
   flex-direction: row; 
-  align-items: center;
 `;
 
 export const BoxTitle = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
   padding-bottom: ${RFValue(16)}px;
 `;

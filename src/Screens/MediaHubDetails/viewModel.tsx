@@ -20,6 +20,7 @@ export const useMediaHubDetailsController = () => {
   const [cast, setCast] = useState([])
   const [videos, setVideos] = useState([])
   const formatGenres = mediaHub?.genres?.slice(0, 2)?.map(genre => genre?.name)?.join('/')
+  const notRelease = Number(formatYear()) > dayjs().year()
 
   const keysWatchProviders = [...Object.keys(watchProviders)]?.filter(key => key != 'link')
 
@@ -55,7 +56,7 @@ export const useMediaHubDetailsController = () => {
   function formatRuntime() {
     const hours = Math.floor(mediaHub?.runtime / 60);  
     const minutes = mediaHub?.runtime % 60;         
-    return mediaHub?.runtime ? ` ‧ ${hours}h ${minutes}m` : ` ‧ ${mediaHub?.number_of_seasons} temporadas`;
+    return notRelease ? '' : mediaHub?.runtime ? ` ‧ ${hours > 0 ? hours + 'h ' : ''}${minutes}m` : ` ‧ ${mediaHub?.number_of_seasons} temporadas`;
   }
 
   function formatYear() {
@@ -89,6 +90,7 @@ export const useMediaHubDetailsController = () => {
     favoriteShow,
     keysWatchProviders,
     cast,
-    watchProviders
+    watchProviders,
+    notRelease
   }
 }
