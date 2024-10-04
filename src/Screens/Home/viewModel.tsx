@@ -54,12 +54,10 @@ export const useHomeViewModel = () => {
     const queryGenres = `/genre/${typeOfShow === 'MOVIE' ? 'movie': 'tv'}/list?language=pt-BR`
     const responseGenres = await api.get(queryGenres, {
       params: {
-        api_key: '00ffa5a0a1e1185fb85db6a05cfd38b8'
       }
     })
     const responsePopularShows = await api.get(queryPopularShows, {
       params: {
-        api_key: '00ffa5a0a1e1185fb85db6a05cfd38b8'
       }
     })
     if (responsePopularShows && responseGenres) {
@@ -100,7 +98,6 @@ export const useHomeViewModel = () => {
     const query = `/discover/${verifyTypeOfShow === 'MOVIE' ? 'movie' : 'tv'}?language=pt-BR&page=${verifyPage}&with_genres=${item?.id}`
     const responseDiscoverShows = await api.get(query, {
       params: {
-        api_key: '00ffa5a0a1e1185fb85db6a05cfd38b8'
       }
     })
     if(responseDiscoverShows) {

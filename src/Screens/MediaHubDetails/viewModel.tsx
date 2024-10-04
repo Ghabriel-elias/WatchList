@@ -27,7 +27,6 @@ export const useMediaHubDetailsController = () => {
     const queryGenres = `/${typeOfShow}/${mediaHubId}?language=pt-BR`
     const response = await api.get(queryGenres, {
       params: {
-        api_key: '00ffa5a0a1e1185fb85db6a05cfd38b8'
       }
     })
     if (response?.data) {
@@ -39,7 +38,6 @@ export const useMediaHubDetailsController = () => {
     const queryGenres = `/${typeOfShow}/${mediaHubId}/watch/providers?language=pt-BR`
     const response = await api.get(queryGenres, {
       params: {
-        api_key: '00ffa5a0a1e1185fb85db6a05cfd38b8'
       }
     })
     const watchProvidersBr = response?.data?.results['BR']
@@ -52,7 +50,6 @@ export const useMediaHubDetailsController = () => {
     const queryGenres = `/${typeOfShow}/${mediaHubId}/credits`
     const response = await api.get(queryGenres, {
       params: {
-        api_key: '00ffa5a0a1e1185fb85db6a05cfd38b8'
       }
     })
     if (response?.data?.cast) {
@@ -64,7 +61,6 @@ export const useMediaHubDetailsController = () => {
     const queryGenres = `/${typeOfShow}/${mediaHubId}/videos`
     const response = await api.get(queryGenres, {
       params: {
-        api_key: '00ffa5a0a1e1185fb85db6a05cfd38b8'
       }
     })
     if (response?.data?.results) {
