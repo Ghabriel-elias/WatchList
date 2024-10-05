@@ -17,6 +17,13 @@
 - 🎨 **Styled-components**: For styling the components.
 - 🎥 **TMDB API**: To fetch movie and TV show data.
 
+## 📸 Screenshots
+
+<img src="https://github.com/user-attachments/assets/2b76cbed-8b69-435f-8749-93235206eff3" alt="Screenshot 1" width="200"/>
+<img src="https://github.com/user-attachments/assets/0441b5d0-b8e3-4555-b24a-7b40865d553e" alt="Screenshot 2" width="200"/>
+<img src="https://github.com/user-attachments/assets/e0dd162c-47df-46f6-8ec1-cb1d085d46f7" alt="Screenshot 3" width="200"/>
+<img src="https://github.com/user-attachments/assets/afe5b735-9c79-43e8-b33f-6a9881277f8c" alt="Screenshot 4" width="200"/>
+
 ## 🚀 Setup
 
 1. Clone this repository:
@@ -42,13 +49,6 @@
     ```bash
     yarn start
     ```
-
-## 📸 Screenshots
-
-<img src="https://github.com/user-attachments/assets/2b76cbed-8b69-435f-8749-93235206eff3" alt="Screenshot 1" width="200"/>
-<img src="https://github.com/user-attachments/assets/0441b5d0-b8e3-4555-b24a-7b40865d553e" alt="Screenshot 2" width="200"/>
-<img src="https://github.com/user-attachments/assets/e0dd162c-47df-46f6-8ec1-cb1d085d46f7" alt="Screenshot 3" width="200"/>
-<img src="https://github.com/user-attachments/assets/afe5b735-9c79-43e8-b33f-6a9881277f8c" alt="Screenshot 4" width="200"/>
 
 ## 🤝 Contributing
 
