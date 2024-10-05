@@ -143,19 +143,23 @@ export const MediaHubDetails = () => {
             />
           </>
         ) : null}
-        <GlobalTextComponent
-          color="lightColor"
-          fontFamily="poppinsSemiBold"
-          fontSize={18}
-          text={`Elenco`}
-          style={{paddingBottom: 16}}
-        />
-        <FlatList
-          data={cast}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          renderItem={renderItemCast}
-        />
+        {cast?.length ? (
+          <>
+            <GlobalTextComponent
+              color="lightColor"
+              fontFamily="poppinsSemiBold"
+              fontSize={18}
+              text={`Elenco`}
+              style={{paddingBottom: 16}}
+            />
+            <FlatList
+              data={cast}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              renderItem={renderItemCast}
+            />
+          </>
+        ) : null}
       </S.MovieInfo>
     </S.Container>
   )
