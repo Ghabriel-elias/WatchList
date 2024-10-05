@@ -1,6 +1,6 @@
-# 🎬 Movie App
+# 🎬 WatchList
 
-**Movie App** is a non-profit application that helps you discover movies and TV shows. It provides detailed information such as where to watch, cast, and synopsis. You can also save your favorite titles to watch later.
+**WatchList** is a non-profit application that helps you discover movies and TV shows. It provides detailed information such as where to watch, cast, and synopsis. You can also save your favorite titles to watch later.
 
 ## 🌟 Features
 
