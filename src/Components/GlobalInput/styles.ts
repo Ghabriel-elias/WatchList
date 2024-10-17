@@ -33,7 +33,6 @@ export const Input = styled.TextInput<InputProps>`
   flex: 1;
   justify-content: center; 
   align-items: center;
-  margin-top: ${({showLabel}) => RFValue(showLabel ? 10 : 2)}px;
   padding-left: 0px;
 `;
 

@@ -1,7 +1,7 @@
 import { RFValue } from 'react-native-responsive-fontsize'
 import * as S from './style'
 import themes from '../../../../Global/themes';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {MaterialCommunityIcons} from '@expo/vector-icons'
 
 const {colors} = themes
 

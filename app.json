@@ -1,4 +1,7 @@
 {
   "name": "movieApp",
-  "displayName": "movieApp"
+  "displayName": "movieApp",
+  "plugins": [
+    "expo-font"
+  ]
 }

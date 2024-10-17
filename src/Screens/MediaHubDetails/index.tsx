@@ -2,7 +2,7 @@ import { GlobalTextComponent } from "../../Components/GlobalTextComponent";
 import { IconComponent } from "./Components/IconComponent";
 import * as S from './style'
 import { FlatList, Image, View } from "react-native";
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {MaterialCommunityIcons} from '@expo/vector-icons'
 import { RFValue } from "react-native-responsive-fontsize";
 import { useMediaHubDetailsController } from "./viewModel";
 import { imageUrl } from "../../Global/imageUrl";

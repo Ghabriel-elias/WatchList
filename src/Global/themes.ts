@@ -10,10 +10,10 @@ export default {
     transparent: 'transparent'
   },
   fonts: {
-    poppinsLight: 'Poppins-Light',
-    poppinsRegular: 'Poppins-Regular',
-    poppinsMedium: 'Poppins-Medium',
-    poppinsSemiBold: 'Poppins-SemiBold',
-    poppinsBold: 'Poppins-Bold',
+    poppinsLight: 'Poppins_300Light',
+    poppinsRegular: 'Poppins_400Regular',
+    poppinsMedium: 'Poppins_500Medium',
+    poppinsSemiBold: 'Poppins_600SemiBold',
+    poppinsBold: 'Poppins_700Bold',
   }
 }

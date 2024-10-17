@@ -4,7 +4,7 @@ import themes from '../../Global/themes'
 import { useEffect, useRef, useState } from 'react'
 import { GlobalTextComponent } from '../GlobalTextComponent';
 import { RFValue } from 'react-native-responsive-fontsize';
-import Feather from 'react-native-vector-icons/Feather';
+import {Feather} from '@expo/vector-icons'
 
 interface GlobalInputProps  {
     value: string;

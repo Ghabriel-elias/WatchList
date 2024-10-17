@@ -12,19 +12,21 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		310E8B3E307B3F63FE30F7AB /* libPods-movieApp-movieAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9FCB17B1CA80A0D78CEF2B1 /* libPods-movieApp-movieAppTests.a */; };
-		4C40E2DE8C424B47BB092694 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4F026CE49B848B88CAACEA5 /* Poppins-SemiBold.ttf */; };
-		785AAB37423E47B2B32053E2 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9932D3473BD45C983C48A25 /* Poppins-Medium.ttf */; };
-		78EEE276CF2D449188895693 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CB740217B654DC7BEBC5309 /* Poppins-Light.ttf */; };
+		4A75830A35C889D520B9483E /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C665ECD122E16D66B3724F49 /* ExpoModulesProvider.swift */; };
+		4C40E2DE8C424B47BB092694 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		59799A02EB37F7C63B7EB934 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4FBD41D127332F87334A42 /* ExpoModulesProvider.swift */; };
+		785AAB37423E47B2B32053E2 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		78EEE276CF2D449188895693 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		99B23C01A942475B2B1B7071 /* libPods-movieApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE99FD23322BE77B39128D4 /* libPods-movieApp.a */; };
-		9A04BB532BEFC28700299543 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A04BB402BEFC28700299543 /* Entypo.ttf */; };
-		9A04BB542BEFC28700299543 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A04BB412BEFC28700299543 /* Feather.ttf */; };
-		9A04BB572BEFC28700299543 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A04BB442BEFC28700299543 /* EvilIcons.ttf */; };
-		9A04BB5B2BEFC28700299543 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A04BB482BEFC28700299543 /* FontAwesome.ttf */; };
-		9A04BB5D2BEFC28700299543 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A04BB4A2BEFC28700299543 /* AntDesign.ttf */; };
-		BD780485C0114EC2B8C3793D /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC334BA012F046F5915342FA /* Poppins-Regular.ttf */; };
+		9A04BB532BEFC28700299543 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		9A04BB542BEFC28700299543 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		9A04BB572BEFC28700299543 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		9A04BB5B2BEFC28700299543 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		9A04BB5D2BEFC28700299543 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		BD780485C0114EC2B8C3793D /* (null) in Resources */ = {isa = PBXBuildFile; };
 		D0E3390C70F4EBECF3D58E6E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D28053BAED7F8DEFD4768FEC /* PrivacyInfo.xcprivacy */; };
-		DB71F78D846B44169C825925 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C6E01590816499AB474C4AA /* Poppins-Bold.ttf */; };
+		DB71F78D846B44169C825925 /* (null) in Resources */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,24 +50,16 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = movieApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = movieApp/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = movieApp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		3C6E01590816499AB474C4AA /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		4FB45151935343B85B8CD768 /* Pods-movieApp-movieAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movieApp-movieAppTests.debug.xcconfig"; path = "Target Support Files/Pods-movieApp-movieAppTests/Pods-movieApp-movieAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7CE99FD23322BE77B39128D4 /* libPods-movieApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-movieApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = movieApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C394E8F6F9BF99F4BAFD225 /* Pods-movieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movieApp.release.xcconfig"; path = "Target Support Files/Pods-movieApp/Pods-movieApp.release.xcconfig"; sourceTree = "<group>"; };
-		8CB740217B654DC7BEBC5309 /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
-		9A04BB402BEFC28700299543 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Entypo.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
-		9A04BB412BEFC28700299543 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
-		9A04BB442BEFC28700299543 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = EvilIcons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
-		9A04BB482BEFC28700299543 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
-		9A04BB4A2BEFC28700299543 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AntDesign.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		9A5DA2A91DEDEBB67EB33C78 /* Pods-movieApp-movieAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movieApp-movieAppTests.release.xcconfig"; path = "Target Support Files/Pods-movieApp-movieAppTests/Pods-movieApp-movieAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		B0ABCBB3062C7FD96C25BF1C /* Pods-movieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movieApp.debug.xcconfig"; path = "Target Support Files/Pods-movieApp/Pods-movieApp.debug.xcconfig"; sourceTree = "<group>"; };
-		BC334BA012F046F5915342FA /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		C665ECD122E16D66B3724F49 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-movieApp-movieAppTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		CD4FBD41D127332F87334A42 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-movieApp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		D28053BAED7F8DEFD4768FEC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = movieApp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		D9FCB17B1CA80A0D78CEF2B1 /* libPods-movieApp-movieAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-movieApp-movieAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4F026CE49B848B88CAACEA5 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
-		E9932D3473BD45C983C48A25 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -131,6 +125,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3048787015120E08D9322F04 /* movieAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				C665ECD122E16D66B3724F49 /* ExpoModulesProvider.swift */,
+			);
+			name = movieAppTests;
+			sourceTree = "<group>";
+		};
+		48E8BAFE219E7500BA2D55D8 /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				9232201835A109434AB719E3 /* movieApp */,
+				3048787015120E08D9322F04 /* movieAppTests */,
+			);
+			name = ExpoModulesProviders;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +160,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
 				EE0447D23ED449D79018E632 /* Resources */,
+				48E8BAFE219E7500BA2D55D8 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -164,14 +176,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		9232201835A109434AB719E3 /* movieApp */ = {
+			isa = PBXGroup;
+			children = (
+				CD4FBD41D127332F87334A42 /* ExpoModulesProvider.swift */,
+			);
+			name = movieApp;
+			sourceTree = "<group>";
+		};
 		9A04BB102BEFC19400299543 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				9A04BB4A2BEFC28700299543 /* AntDesign.ttf */,
-				9A04BB402BEFC28700299543 /* Entypo.ttf */,
-				9A04BB442BEFC28700299543 /* EvilIcons.ttf */,
-				9A04BB412BEFC28700299543 /* Feather.ttf */,
-				9A04BB482BEFC28700299543 /* FontAwesome.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -190,14 +205,8 @@
 		EE0447D23ED449D79018E632 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3C6E01590816499AB474C4AA /* Poppins-Bold.ttf */,
-				8CB740217B654DC7BEBC5309 /* Poppins-Light.ttf */,
-				E9932D3473BD45C983C48A25 /* Poppins-Medium.ttf */,
-				BC334BA012F046F5915342FA /* Poppins-Regular.ttf */,
-				E4F026CE49B848B88CAACEA5 /* Poppins-SemiBold.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +217,7 @@
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "movieAppTests" */;
 			buildPhases = (
 				092BD1915CD3F7372F038F74 /* [CP] Check Pods Manifest.lock */,
+				8AB7A9C62334D4BD4200191D /* [Expo] Configure project */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
@@ -229,6 +239,7 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "movieApp" */;
 			buildPhases = (
 				3006C553493F2915F26FD6D5 /* [CP] Check Pods Manifest.lock */,
+				1A00FDDB94EB7EE500D27AC0 /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
@@ -294,18 +305,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				9A04BB532BEFC28700299543 /* Entypo.ttf in Resources */,
-				9A04BB542BEFC28700299543 /* Feather.ttf in Resources */,
-				9A04BB5D2BEFC28700299543 /* AntDesign.ttf in Resources */,
+				9A04BB532BEFC28700299543 /* (null) in Resources */,
+				9A04BB542BEFC28700299543 /* (null) in Resources */,
+				9A04BB5D2BEFC28700299543 /* (null) in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				D0E3390C70F4EBECF3D58E6E /* PrivacyInfo.xcprivacy in Resources */,
-				9A04BB572BEFC28700299543 /* EvilIcons.ttf in Resources */,
-				9A04BB5B2BEFC28700299543 /* FontAwesome.ttf in Resources */,
-				DB71F78D846B44169C825925 /* Poppins-Bold.ttf in Resources */,
-				78EEE276CF2D449188895693 /* Poppins-Light.ttf in Resources */,
-				785AAB37423E47B2B32053E2 /* Poppins-Medium.ttf in Resources */,
-				BD780485C0114EC2B8C3793D /* Poppins-Regular.ttf in Resources */,
-				4C40E2DE8C424B47BB092694 /* Poppins-SemiBold.ttf in Resources */,
+				9A04BB572BEFC28700299543 /* (null) in Resources */,
+				9A04BB5B2BEFC28700299543 /* (null) in Resources */,
+				DB71F78D846B44169C825925 /* (null) in Resources */,
+				78EEE276CF2D449188895693 /* (null) in Resources */,
+				785AAB37423E47B2B32053E2 /* (null) in Resources */,
+				BD780485C0114EC2B8C3793D /* (null) in Resources */,
+				4C40E2DE8C424B47BB092694 /* (null) in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +378,25 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-movieApp/Pods-movieApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		1A00FDDB94EB7EE500D27AC0 /* [Expo] Configure project */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[Expo] Configure project";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-movieApp/expo-configure-project.sh\"\n";
+		};
 		3006C553493F2915F26FD6D5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -423,6 +453,25 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-movieApp/Pods-movieApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8AB7A9C62334D4BD4200191D /* [Expo] Configure project */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[Expo] Configure project";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-movieApp-movieAppTests/expo-configure-project.sh\"\n";
+		};
 		E23D4C97FBD90BEFA69B70AD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -448,6 +497,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* movieAppTests.m in Sources */,
+				4A75830A35C889D520B9483E /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +507,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				59799A02EB37F7C63B7EB934 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +543,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movieApp.app/movieApp";
@@ -516,6 +568,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movieApp.app/movieApp";
@@ -528,7 +581,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A9RX3JDL2S;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = movieApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -541,8 +597,10 @@
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = movieApp;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -556,6 +614,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A9RX3JDL2S;
 				INFOPLIST_FILE = movieApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -567,6 +626,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = movieApp;
 				SWIFT_VERSION = 5.0;
@@ -647,10 +707,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -722,10 +779,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

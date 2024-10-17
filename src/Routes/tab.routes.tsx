@@ -1,11 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
-import Feather from 'react-native-vector-icons/Feather'
+import {Feather} from '@expo/vector-icons'
 import { Home } from '../Screens/Home'
 import themes from '../Global/themes'
-import { UserAccount } from '../Screens/UserAccount'
-import { SearchShows } from '../Screens/SearchShows'
-import { UserRoutes } from './user.routes'
 import { Favorites } from '../Screens/Favorites'
 
 const icons = {
