@@ -20,8 +20,8 @@ export const useMediaHubDetailsController = () => {
   const [cast, setCast] = useState([])
   const [videos, setVideos] = useState([])
   const formatGenres = mediaHub?.genres?.slice(0, 2)?.map(genre => genre?.name)?.join('/')
-  const notRelease = Number(formatYear()) > dayjs().year()
-
+  const notRelease = Number(dayjs(mediaHub?.release_date || mediaHub?.first_air_date)) > Number(dayjs())
+  const [loading, setLoading] = useState(true)
   const keysWatchProviders = [...Object.keys(watchProviders)]?.filter(key => key != 'link')
 
   async function getMediaHubDetail() {
@@ -43,6 +43,7 @@ export const useMediaHubDetailsController = () => {
     const response = await getCastRequest(typeOfShow, mediaHubId)
     if (response?.cast) {
       setCast(response?.cast)
+      setLoading(false)
     }
   }
 
@@ -56,7 +57,7 @@ export const useMediaHubDetailsController = () => {
   function formatRuntime() {
     const hours = Math.floor(mediaHub?.runtime / 60);  
     const minutes = mediaHub?.runtime % 60;         
-    return notRelease ? '' : mediaHub?.runtime ? ` ‧ ${hours > 0 ? hours + 'h ' : ''}${minutes}m` : ` ‧ ${mediaHub?.number_of_seasons} temporadas`;
+    return notRelease && !mediaHub?.runtime && !mediaHub?.number_of_seasons ? '' : mediaHub?.runtime ? ` ‧ ${hours > 0 ? hours + 'h ' : ''}${minutes}m` : ` ‧ ${mediaHub?.number_of_seasons} ${mediaHub?.number_of_seasons > 1 ? 'temporadas' : 'temporada'}`;
   }
 
   function formatYear() {
@@ -91,6 +92,7 @@ export const useMediaHubDetailsController = () => {
     keysWatchProviders,
     cast,
     watchProviders,
-    notRelease
+    notRelease,
+    loading
   }
 }

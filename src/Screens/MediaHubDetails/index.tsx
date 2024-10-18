@@ -6,6 +6,7 @@ import {MaterialCommunityIcons} from '@expo/vector-icons'
 import { RFValue } from "react-native-responsive-fontsize";
 import { useMediaHubDetailsController } from "./viewModel";
 import { imageUrl } from "../../Global/imageUrl";
+import { GlobalLoading } from "../../Components/GlobalLoading";
 
 const keysForWatch = {
   buy: 'Comprar',
@@ -26,7 +27,8 @@ export const MediaHubDetails = () => {
     keysWatchProviders,
     cast,
     watchProviders,
-    notRelease
+    notRelease,
+    loading
   } = useMediaHubDetailsController()
 
   const renderItemIconWatchProvider = ({item}: any) => (
@@ -42,7 +44,7 @@ export const MediaHubDetails = () => {
         color="lightColor"
         fontFamily="poppinsSemiBold"
         fontSize={14}
-        text={keysForWatch[item]}
+        text={keysForWatch[item] || item}
         style={{paddingBottom: 16}}
       />       
       <FlatList
@@ -63,7 +65,7 @@ export const MediaHubDetails = () => {
         <GlobalTextComponent
           color="lightColor"
           fontFamily="poppinsMedium"
-          fontSize={9}
+          fontSize={10}
           text={item?.name}
           numberOfLines={2}
           style={{paddingBottom: 8}}
@@ -71,13 +73,19 @@ export const MediaHubDetails = () => {
         <GlobalTextComponent
           color="lightColor"
           fontFamily="poppinsRegular"
-          fontSize={7}
+          fontSize={9}
           text={item?.character}
           numberOfLines={2}
         />
       </S.BoxCast>
     </View>
   )
+
+  if(loading) {
+    return (
+      <GlobalLoading/>
+    )
+  }
 
   return (
     <S.Container> 
