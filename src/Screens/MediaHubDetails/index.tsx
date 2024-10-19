@@ -11,6 +11,7 @@ import { FlashList } from "@shopify/flash-list";
 import { RenderItemListShows } from "../Home/Components/RenderItemListShows";
 import YoutubePlayer from "react-native-youtube-iframe";
 import Carousel from "react-native-reanimated-carousel";
+import { memo, useCallback, useMemo } from "react";
 
 const keysForWatch = {
   buy: 'Comprar',
@@ -46,7 +47,7 @@ export const MediaHubDetails = () => {
     />
   )
 
-  const renderItemWatchProvider = ({item}: any) => (
+  const RenderItemWatchProvider = memo(({item}: any) => (
     <S.BoxListWatchProvider>
       <GlobalTextComponent
         color="lightColor"
@@ -61,9 +62,9 @@ export const MediaHubDetails = () => {
         renderItem={renderItemIconWatchProvider}
       />     
     </S.BoxListWatchProvider>
-  )
+  ))
 
-  const renderItemCast = ({item}: any) => (
+  const RenderItemCast = memo(({item}: any) => (
     <View>
       <S.ImageCast
         defaultSource={require('../../Assets/defaultImage.jpg')}
@@ -87,7 +88,126 @@ export const MediaHubDetails = () => {
         />
       </S.BoxCast>
     </View>
-  )
+  ))
+
+  const RenderTrailer = memo(({item} : any) => (
+    <View style={{
+      marginRight: 10,
+    }}>
+      <YoutubePlayer
+        height={270}
+        width={270}
+        volume={100}
+        videoId={item?.key}
+      />
+    </View>
+  ))
+
+  const ListImages = useCallback(() => (
+    images?.length > 1 ? (
+      <Carousel
+        testID={"xxx"}
+        loop={true}
+        width={430}
+        height={258}
+        snapEnabled={true}
+        pagingEnabled={true}
+        autoPlay={true}
+        autoPlayInterval={2000}
+        data={images}
+        renderItem={({item}) => {
+          return (
+            <S.CoverImage
+              resizeMode="stretch"
+              defaultSource={require('../../Assets/defaultImage.jpg')}
+              source={{uri: `${imageUrl}${item?.file_path}`}}
+            />
+          )
+        }}
+      />
+    ) : (
+      <S.CoverImage
+        resizeMode="stretch"
+        defaultSource={require('../../Assets/defaultImage.jpg')}
+        source={{uri: `${imageUrl}${mediaHub?.backdrop_path}`}}
+      />
+    )
+  ), [images])
+
+  const ListVideos = useCallback(() => {
+    return (
+      videos.length > 1 ? (
+        <>    
+          <GlobalTextComponent
+            color="lightColor"
+            fontFamily="poppinsSemiBold"
+            fontSize={18}
+            text={`Trailers`}
+            style={{paddingBottom: 16}}
+          />
+          <FlatList
+            data={videos}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={{
+              width: '100%',
+              height: RFValue(135)
+            }}
+            renderItem={({item}) => (
+              <RenderTrailer item={item}/>
+            )}
+          />
+        </>
+      ) : null
+    )
+  }, [videos])
+
+  const ListProviders = useCallback(() => {
+    return (
+      keysWatchProviders.length ? (
+        <>    
+          <GlobalTextComponent
+            color="lightColor"
+            fontFamily="poppinsSemiBold"
+            fontSize={18}
+            text={`Onde posso assistir?`}
+            style={{paddingBottom: 16}}
+          />
+          <FlatList
+            data={keysWatchProviders}
+            renderItem={({item}) => (
+              <RenderItemWatchProvider item={item}/>
+            )}
+          />
+        </>
+      ) : null
+    )
+  }, [keysWatchProviders])
+
+  const ListCast = useCallback(() => {
+    return (
+      cast?.length ? (
+        <>
+          <GlobalTextComponent
+            color="lightColor"
+            fontFamily="poppinsSemiBold"
+            fontSize={18}
+            text={`Elenco`}
+            style={{paddingBottom: 16}}
+          />
+          <FlatList
+            data={cast}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            renderItem={({item}) => (
+              <RenderItemCast item={item}/>
+            )}
+            style={{paddingBottom: 16}}
+          />
+        </>
+      ) : null
+    )
+  }, [cast])
 
   if(loading) {
     return (
@@ -101,34 +221,7 @@ export const MediaHubDetails = () => {
         <IconComponent handleButton={goBack} iconName="arrow-left"/>
         <IconComponent handleButton={favoriteShow} iconName={showFavorited ? "cards-heart" : "cards-heart-outline"}/>
       </S.Header>
-      {images?.length > 1 ? (
-        <Carousel
-          testID={"xxx"}
-          loop={true}
-          width={430}
-          height={258}
-          snapEnabled={true}
-          pagingEnabled={true}
-          autoPlay={true}
-          autoPlayInterval={2000}
-          data={images}
-          renderItem={({item}) => {
-            return (
-              <S.CoverImage
-                resizeMode="stretch"
-                defaultSource={require('../../Assets/defaultImage.jpg')}
-                source={{uri: `${imageUrl}${item?.file_path}`}}
-              />
-            )
-          }}
-        />
-      ) : (
-        <S.CoverImage
-          resizeMode="stretch"
-          defaultSource={require('../../Assets/defaultImage.jpg')}
-          source={{uri: `${imageUrl}${mediaHub?.backdrop_path}`}}
-        />
-      )}
+        <ListImages/>
       <S.MovieInfo>
         <S.BoxTitle>
           <GlobalTextComponent
@@ -167,73 +260,9 @@ export const MediaHubDetails = () => {
             style={{paddingBottom: 16}}
           />
         ) : null}
-        {videos.length > 1 ? (
-          <>    
-            <GlobalTextComponent
-              color="lightColor"
-              fontFamily="poppinsSemiBold"
-              fontSize={18}
-              text={`Trailers`}
-              style={{paddingBottom: 16}}
-            />
-            <FlatList
-              data={videos}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              style={{
-                width: '100%',
-                height: RFValue(135)
-              }}
-              renderItem={({item}) => {
-                return (
-                  <View style={{
-                    marginRight: 10,
-                  }}>
-                    <YoutubePlayer
-                      height={270}
-                      width={270}
-                      volume={100}
-                      videoId={item?.key}
-                    />
-                  </View>
-                )
-              }}
-            />
-          </>
-        ) : null}
-        {keysWatchProviders.length ? (
-          <>    
-            <GlobalTextComponent
-              color="lightColor"
-              fontFamily="poppinsSemiBold"
-              fontSize={18}
-              text={`Onde posso assistir?`}
-              style={{paddingBottom: 16}}
-            />
-            <FlatList
-              data={keysWatchProviders}
-              renderItem={renderItemWatchProvider}
-            />
-          </>
-        ) : null}
-        {cast?.length ? (
-          <>
-            <GlobalTextComponent
-              color="lightColor"
-              fontFamily="poppinsSemiBold"
-              fontSize={18}
-              text={`Elenco`}
-              style={{paddingBottom: 16}}
-            />
-            <FlatList
-              data={cast}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              renderItem={renderItemCast}
-              style={{paddingBottom: 16}}
-            />
-          </>
-        ) : null}
+          <ListVideos/>
+          <ListProviders/>
+          <ListCast/>
         {/* {similar?.length > 1 ? (
           <>
             <GlobalTextComponent
