@@ -26,6 +26,9 @@ target 'movieApp' do
   end
   config = use_native_modules!
 
+  use_frameworks! :linkage => :static # add
+  $RNFirebaseAsStaticFramework = true # add
+
   use_react_native!(
     :path => config[:reactNativePath],
     # An absolute path to your application root.
