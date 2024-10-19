@@ -18,6 +18,7 @@ const keysForWatch = {
   buy: 'Comprar',
   rent: 'Alugar',
   flatrate: 'Stream',
+  ads: 'Anúncios'
 }
 
 export const MediaHubDetails = () => {

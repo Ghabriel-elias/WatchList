@@ -81,7 +81,7 @@ export const useMediaHubDetailsController = () => {
   function formatRuntime() {
     const hours = Math.floor(mediaHub?.runtime / 60);  
     const minutes = mediaHub?.runtime % 60;         
-    return notRelease && !mediaHub?.runtime && !mediaHub?.number_of_seasons ? '' : mediaHub?.runtime ? ` ‧ ${hours > 0 ? hours + 'h ' : ''}${minutes}m` : ` ‧ ${mediaHub?.number_of_seasons} ${mediaHub?.number_of_seasons > 1 ? 'temporadas' : 'temporada'}`;
+    return notRelease || !mediaHub?.runtime && !mediaHub?.number_of_seasons ? '' : mediaHub?.runtime ? ` ‧ ${hours > 0 ? hours + 'h ' : ''}${minutes}m` : ` ‧ ${mediaHub?.number_of_seasons} ${mediaHub?.number_of_seasons > 1 ? 'temporadas' : 'temporada'}${mediaHub?.number_of_episodes ?` ‧ ${mediaHub?.number_of_episodes} episódios` : ''}`;
   }
 
   function formatYear() {

@@ -36,7 +36,7 @@ export const BoxHeaderList = styled.View`
 `;
 
 export const BoxEmptyComponent = styled.View`
-  height: 100;
+  height: ${RFValue(100)}px;
   width: 100%;
   justify-content: center;
   align-items: center;

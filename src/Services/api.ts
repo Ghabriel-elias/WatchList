@@ -87,7 +87,7 @@ export async function searchMediaHub(term: string) {
 
 export async function getTrendingMediaRequest() {
   try {
-    const query = `/trending/movie/day?language=pt-BR`
+    const query = `/trending/movie/week?language=pt-BR`
     const response = await api.get(query, {
       params: {
         api_key: apikey,
