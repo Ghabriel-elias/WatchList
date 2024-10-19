@@ -162,8 +162,6 @@ export const MediaHubDetails = () => {
               return (
                 <View style={{
                   marginRight: 10,
-                  borderRadius: 8,
-                  overflow: 'hidden',
                 }}>
                   <YoutubePlayer
                     height={270}
