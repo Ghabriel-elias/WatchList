@@ -1,7 +1,7 @@
 import { useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Store/store";
-import api, { getCastRequest, getMediaHubDetailsRequest, getSimilar, getVideos, getWatchProvidersRequest } from "../../Services/api";
+import api, { getCastRequest, getImages, getMediaHubDetailsRequest, getSimilar, getVideos, getWatchProvidersRequest } from "../../Services/api";
 import { useCallback, useState } from "react";
 import { addFavorite, removeFavorite } from "../../Store/favorites";
 import dayjs from "dayjs";
@@ -20,6 +20,7 @@ export const useMediaHubDetailsController = () => {
   const [watchProviders, setWatchProviders] = useState([])
   const [cast, setCast] = useState([])
   const [videos, setVideos] = useState([])
+  const [images, setImages] = useState([])
   const formatGenres = mediaHub?.genres?.slice(0, 2)?.map(genre => genre?.name)?.join('/')
   const notRelease = Number(dayjs(mediaHub?.release_date || mediaHub?.first_air_date)) > Number(dayjs())
   const [loading, setLoading] = useState(true)
@@ -43,6 +44,13 @@ export const useMediaHubDetailsController = () => {
     const response = await getVideos(typeOfShow, mediaHubId)
     if (response) {
       setVideos(response?.results)
+    }
+  }
+  
+  async function getImagesMediaHub() {
+    const response = await getImages(typeOfShow, mediaHubId)
+    if (response) {
+      setImages(response?.backdrops)
     }
   }
 
@@ -91,6 +99,7 @@ export const useMediaHubDetailsController = () => {
     useCallback(() => {
       getMediaHubDetail()
       getWatchProviders()
+      getImagesMediaHub()
       // getSimilarMediaHub()
       getMediaHubVideos()
       getCast()
@@ -112,6 +121,7 @@ export const useMediaHubDetailsController = () => {
     loading,
     similar,
     handleNavigateShowDetails,
-    videos
+    videos,
+    images
   }
 }

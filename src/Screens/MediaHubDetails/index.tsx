@@ -10,6 +10,7 @@ import { GlobalLoading } from "../../Components/GlobalLoading";
 import { FlashList } from "@shopify/flash-list";
 import { RenderItemListShows } from "../Home/Components/RenderItemListShows";
 import YoutubePlayer from "react-native-youtube-iframe";
+import Carousel from "react-native-reanimated-carousel";
 
 const keysForWatch = {
   buy: 'Comprar',
@@ -34,7 +35,8 @@ export const MediaHubDetails = () => {
     loading,
     similar,
     handleNavigateShowDetails,
-    videos
+    videos,
+    images
   } = useMediaHubDetailsController()
 
   const renderItemIconWatchProvider = ({item}: any) => (
@@ -93,17 +95,42 @@ export const MediaHubDetails = () => {
     )
   }
 
+  console.log(images?.length)
+
   return (
     <S.Container> 
       <S.Header>
         <IconComponent handleButton={goBack} iconName="arrow-left"/>
         <IconComponent handleButton={favoriteShow} iconName={showFavorited ? "cards-heart" : "cards-heart-outline"}/>
       </S.Header>
-      <S.CoverImage
-        resizeMode="stretch"
-        defaultSource={require('../../Assets/defaultImage.jpg')}
-        source={{uri: `${imageUrl}${mediaHub?.backdrop_path}`}}
-      />
+      {images?.length > 1 ? (
+        <Carousel
+          testID={"xxx"}
+          loop={true}
+          width={430}
+          height={258}
+          snapEnabled={true}
+          pagingEnabled={true}
+          autoPlay={true}
+          autoPlayInterval={2000}
+          data={images}
+          renderItem={({item}) => {
+            return (
+              <S.CoverImage
+                resizeMode="stretch"
+                defaultSource={require('../../Assets/defaultImage.jpg')}
+                source={{uri: `${imageUrl}${item?.file_path}`}}
+              />
+            )
+          }}
+        />
+      ) : (
+        <S.CoverImage
+          resizeMode="stretch"
+          defaultSource={require('../../Assets/defaultImage.jpg')}
+          source={{uri: `${imageUrl}${mediaHub?.backdrop_path}`}}
+        />
+      )}
       <S.MovieInfo>
         <S.BoxTitle>
           <GlobalTextComponent
@@ -166,6 +193,7 @@ export const MediaHubDetails = () => {
                   <YoutubePlayer
                     height={270}
                     width={270}
+                    volume={100}
                     videoId={item?.key}
                   />
                 </View>

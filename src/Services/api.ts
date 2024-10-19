@@ -45,7 +45,21 @@ export async function getVideos(showType: 'movie' | 'tv', mediaHubId: number) {
     })
     return responseGenres?.data
   } catch (error: any) {
-    throw new Error(error?.response?.data?.message || 'Erro ao buscar gêneros, por favor tente novamente')
+    throw new Error(error?.response?.data?.message || 'Erro ao buscar trailers, por favor tente novamente')
+  }
+}
+
+export async function getImages(showType: 'movie' | 'tv', mediaHubId: number) {
+  try {
+    const queryGenres = `/${showType}/${mediaHubId}/images`
+    const responseGenres = await api.get(queryGenres, {
+      params: {
+        api_key: apikey
+      }
+    })
+    return responseGenres?.data
+  } catch (error: any) {
+    throw new Error(error?.response?.data?.message || 'Erro ao buscar imagens, por favor tente novamente')
   }
 }
 

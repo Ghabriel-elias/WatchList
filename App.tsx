@@ -7,6 +7,7 @@ import { persistor, store } from './src/Store/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import FlashMessage from 'react-native-flash-message';
+import {GestureHandlerRootView} from 'react-native-gesture-handler'
 import { AppRoutes } from './src/Routes/app.routes';
 import {
   useFonts,
@@ -30,18 +31,20 @@ function App(): React.JSX.Element {
   })
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: themes.colors.primaryColor}}>
-      <Provider store={store}>
-        <PersistGate persistor={persistor} loading={null}>
-          <ThemeProvider theme={themes}>
-            <NavigationContainer>
-              <AppRoutes/>
-              <FlashMessage statusBarHeight={statusBarHeight}/>
-            </NavigationContainer>
-          </ThemeProvider>
-        </PersistGate>
-      </Provider>
-    </SafeAreaView>
+    <GestureHandlerRootView>
+      <SafeAreaView style={{flex: 1, backgroundColor: themes.colors.primaryColor}}>
+        <Provider store={store}>
+          <PersistGate persistor={persistor} loading={null}>
+            <ThemeProvider theme={themes}>
+              <NavigationContainer>
+                <AppRoutes/>
+                <FlashMessage statusBarHeight={statusBarHeight}/>
+              </NavigationContainer>
+            </ThemeProvider>
+          </PersistGate>
+        </Provider>
+      </SafeAreaView>
+    </GestureHandlerRootView>
   );
 }
 
