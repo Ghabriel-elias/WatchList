@@ -167,38 +167,40 @@ export const MediaHubDetails = () => {
             style={{paddingBottom: 16}}
           />
         ) : null}
-        <>    
-          <GlobalTextComponent
-            color="lightColor"
-            fontFamily="poppinsSemiBold"
-            fontSize={18}
-            text={`Trailers`}
-            style={{paddingBottom: 16}}
-          />
-          <FlatList
-            data={videos}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={{
-              width: '100%',
-              height: RFValue(135)
-            }}
-            renderItem={({item}) => {
-              return (
-                <View style={{
-                  marginRight: 10,
-                }}>
-                  <YoutubePlayer
-                    height={270}
-                    width={270}
-                    volume={100}
-                    videoId={item?.key}
-                  />
-                </View>
-              )
-            }}
-          />
-        </>
+        {videos.length > 1 ? (
+          <>    
+            <GlobalTextComponent
+              color="lightColor"
+              fontFamily="poppinsSemiBold"
+              fontSize={18}
+              text={`Trailers`}
+              style={{paddingBottom: 16}}
+            />
+            <FlatList
+              data={videos}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={{
+                width: '100%',
+                height: RFValue(135)
+              }}
+              renderItem={({item}) => {
+                return (
+                  <View style={{
+                    marginRight: 10,
+                  }}>
+                    <YoutubePlayer
+                      height={270}
+                      width={270}
+                      volume={100}
+                      videoId={item?.key}
+                    />
+                  </View>
+                )
+              }}
+            />
+          </>
+        ) : null}
         {keysWatchProviders.length ? (
           <>    
             <GlobalTextComponent
