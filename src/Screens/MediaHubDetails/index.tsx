@@ -95,10 +95,8 @@ export const MediaHubDetails = () => {
     )
   }
 
-  console.log(images?.length)
-
   return (
-    <S.Container> 
+    <S.Container showsVerticalScrollIndicator={false}> 
       <S.Header>
         <IconComponent handleButton={goBack} iconName="arrow-left"/>
         <IconComponent handleButton={favoriteShow} iconName={showFavorited ? "cards-heart" : "cards-heart-outline"}/>
