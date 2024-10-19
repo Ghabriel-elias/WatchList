@@ -21,6 +21,34 @@ export async function getGenres(showType: 'movie' | 'tv') {
   }
 }
 
+export async function getSimilar(showType: 'movie' | 'tv', mediaHubId: number) {
+  try {
+    const queryGenres = `/${showType}/${mediaHubId}/similar?language=pt-BR`
+    const responseGenres = await api.get(queryGenres, {
+      params: {
+        api_key: apikey
+      }
+    })
+    return responseGenres?.data
+  } catch (error: any) {
+    throw new Error(error?.response?.data?.message || 'Erro ao buscar similares, por favor tente novamente')
+  }
+}
+
+export async function getVideos(showType: 'movie' | 'tv', mediaHubId: number) {
+  try {
+    const queryGenres = `/${showType}/${mediaHubId}/videos?language=pt-BR`
+    const responseGenres = await api.get(queryGenres, {
+      params: {
+        api_key: apikey
+      }
+    })
+    return responseGenres?.data
+  } catch (error: any) {
+    throw new Error(error?.response?.data?.message || 'Erro ao buscar gêneros, por favor tente novamente')
+  }
+}
+
 export async function searchMediaHub(term: string) {
   try {
     const queryMovies = `/search/movie`
@@ -60,20 +88,6 @@ export async function getTrendingMediaRequest() {
 export async function getWatchProvidersRequest(typeOfShow: 'movie' | 'tv', mediaHubId: number) {
   try {
     const query = `/${typeOfShow}/${mediaHubId}/watch/providers?language=pt-BR`
-    const response = await api.get(query, {
-      params: {
-        api_key: apikey
-      }
-    })
-    return response?.data
-  } catch (error: any) {
-    throw new Error(error?.response?.data?.message || 'Erro ao buscar provedores, por favor tente novamente')
-  }
-}
-
-export async function getVideosRequest(typeOfShow: 'movie' | 'tv', mediaHubId: number) {
-  try {
-    const query = `/${typeOfShow}/${mediaHubId}/videos`
     const response = await api.get(query, {
       params: {
         api_key: apikey

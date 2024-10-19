@@ -1,12 +1,15 @@
 import { GlobalTextComponent } from "../../Components/GlobalTextComponent";
 import { IconComponent } from "./Components/IconComponent";
 import * as S from './style'
-import { FlatList, Image, View } from "react-native";
+import { Dimensions, FlatList, Image, View } from "react-native";
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 import { RFValue } from "react-native-responsive-fontsize";
 import { useMediaHubDetailsController } from "./viewModel";
 import { imageUrl } from "../../Global/imageUrl";
 import { GlobalLoading } from "../../Components/GlobalLoading";
+import { FlashList } from "@shopify/flash-list";
+import { RenderItemListShows } from "../Home/Components/RenderItemListShows";
+import YoutubePlayer from "react-native-youtube-iframe";
 
 const keysForWatch = {
   buy: 'Comprar',
@@ -28,7 +31,10 @@ export const MediaHubDetails = () => {
     cast,
     watchProviders,
     notRelease,
-    loading
+    loading,
+    similar,
+    handleNavigateShowDetails,
+    videos
   } = useMediaHubDetailsController()
 
   const renderItemIconWatchProvider = ({item}: any) => (
@@ -136,6 +142,39 @@ export const MediaHubDetails = () => {
             style={{paddingBottom: 16}}
           />
         ) : null}
+        <>    
+          <GlobalTextComponent
+            color="lightColor"
+            fontFamily="poppinsSemiBold"
+            fontSize={18}
+            text={`Trailers`}
+            style={{paddingBottom: 16}}
+          />
+          <FlatList
+            data={videos}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={{
+              width: '100%',
+              height: RFValue(135)
+            }}
+            renderItem={({item}) => {
+              return (
+                <View style={{
+                  marginRight: 10,
+                  borderRadius: 8,
+                  overflow: 'hidden',
+                }}>
+                  <YoutubePlayer
+                    height={270}
+                    width={270}
+                    videoId={item?.key}
+                  />
+                </View>
+              )
+            }}
+          />
+        </>
         {keysWatchProviders.length ? (
           <>    
             <GlobalTextComponent
@@ -165,9 +204,42 @@ export const MediaHubDetails = () => {
               horizontal
               showsHorizontalScrollIndicator={false}
               renderItem={renderItemCast}
+              style={{paddingBottom: 16}}
             />
           </>
         ) : null}
+        {/* {similar?.length > 1 ? (
+          <>
+            <GlobalTextComponent
+              color="lightColor"
+              fontFamily="poppinsSemiBold"
+              fontSize={18}
+              text={`Similares`}
+              style={{paddingBottom: 16}}
+            />
+            <View style={{
+              height: RFValue(160),
+              width: '100%',
+              marginLeft: -4
+            }}>
+            <FlatList
+              scrollEnabled={!!similar?.length}
+              data={similar}
+              renderItem={({item}) => (
+                <View style={{
+                  width: RFValue(100),
+                  height: RFValue(80),
+                }}>
+                  {RenderItemListShows({item, handleRenderItem: handleNavigateShowDetails, renderSkeleton: !similar?.length})}
+                </View>
+              )}
+              keyboardShouldPersistTaps='always'
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
+            </View>
+          </>
+        ) : null} */}
       </S.MovieInfo>
     </S.Container>
   )

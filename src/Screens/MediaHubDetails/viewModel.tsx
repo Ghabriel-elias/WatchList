@@ -1,17 +1,18 @@
 import { useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Store/store";
-import api, { getCastRequest, getMediaHubDetailsRequest, getVideosRequest, getWatchProvidersRequest } from "../../Services/api";
+import api, { getCastRequest, getMediaHubDetailsRequest, getSimilar, getVideos, getWatchProvidersRequest } from "../../Services/api";
 import { useCallback, useState } from "react";
 import { addFavorite, removeFavorite } from "../../Store/favorites";
 import dayjs from "dayjs";
+import { ShowProps } from "../Home/types";
 
 export const useMediaHubDetailsController = () => {
 
   const route = useRoute()
   const mediaHubId = route?.params?.item?.id
   const typeOfShow = route?.params?.selectedTypeOfShow
-  const {goBack}  = useNavigation()
+  const {goBack, navigate}  = useNavigation()
   const dispatch = useDispatch()
   const {favorites} = useSelector((store: RootState) => store.favorites)
   const showFavorited = !!(favorites?.find(favorite => favorite.id === mediaHubId))
@@ -22,12 +23,33 @@ export const useMediaHubDetailsController = () => {
   const formatGenres = mediaHub?.genres?.slice(0, 2)?.map(genre => genre?.name)?.join('/')
   const notRelease = Number(dayjs(mediaHub?.release_date || mediaHub?.first_air_date)) > Number(dayjs())
   const [loading, setLoading] = useState(true)
+  const [similar, setSimilar] = useState([])
   const keysWatchProviders = [...Object.keys(watchProviders)]?.filter(key => key != 'link')
+
+  function handleNavigateShowDetails(item: ShowProps) {
+    goBack()
+    navigate('MediaHubDetails', {item, selectedTypeOfShow: typeOfShow})
+  }
 
   async function getMediaHubDetail() {
     const response = await getMediaHubDetailsRequest(typeOfShow, mediaHubId)
     if (response) {
       setMediaHub(response)
+    }
+  }
+
+
+  async function getMediaHubVideos() {
+    const response = await getVideos(typeOfShow, mediaHubId)
+    if (response) {
+      setVideos(response?.results)
+    }
+  }
+
+  async function getSimilarMediaHub() {
+    const response = await getSimilar(typeOfShow, mediaHubId)
+    if (response?.results) {
+      setSimilar(response?.results)
     }
   }
 
@@ -44,13 +66,6 @@ export const useMediaHubDetailsController = () => {
     if (response?.cast) {
       setCast(response?.cast)
       setLoading(false)
-    }
-  }
-
-  async function getVideos() {
-    const response = await getVideosRequest(typeOfShow, mediaHubId)
-    if (response?.results) {
-      setVideos(response?.results)
     }
   }
 
@@ -76,8 +91,9 @@ export const useMediaHubDetailsController = () => {
     useCallback(() => {
       getMediaHubDetail()
       getWatchProviders()
+      // getSimilarMediaHub()
+      getMediaHubVideos()
       getCast()
-      // getVideos()
     }, [])
   )
 
@@ -93,6 +109,9 @@ export const useMediaHubDetailsController = () => {
     cast,
     watchProviders,
     notRelease,
-    loading
+    loading,
+    similar,
+    handleNavigateShowDetails,
+    videos
   }
 }
