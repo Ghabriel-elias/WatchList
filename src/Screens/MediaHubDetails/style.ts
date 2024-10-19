@@ -18,6 +18,20 @@ export const Header = styled.View`
   z-index: 2000;
 `;
 
+export const BoxListTrailers = styled.View`
+  width: 100%;
+  height: ${RFValue(135)}px;
+`;
+
+export const BoxTrailers = styled.View`
+  margin-right: ${RFValue(10)}px;
+`;
+
+export const BoxRenderItemCast = styled.View`
+  height: ${RFValue(130)}px;
+  width: ${RFValue(90)}px;
+`;
+
 export const ImageWatchProvider = styled.Image`
   width: ${RFValue(40)}px;
   height: ${RFValue(40)}px;

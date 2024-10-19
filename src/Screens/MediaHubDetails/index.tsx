@@ -12,6 +12,7 @@ import { RenderItemListShows } from "../Home/Components/RenderItemListShows";
 import YoutubePlayer from "react-native-youtube-iframe";
 import Carousel from "react-native-reanimated-carousel";
 import { memo, useCallback, useMemo } from "react";
+import { CastMember, MediaHubTrailerProps, ProviderProps, WatchOptions } from "./model";
 
 const keysForWatch = {
   buy: 'Comprar',
@@ -40,14 +41,14 @@ export const MediaHubDetails = () => {
     images
   } = useMediaHubDetailsController()
 
-  const renderItemIconWatchProvider = ({item}: any) => (
+  const renderItemIconWatchProvider = ({item}: {item: ProviderProps}) => (
     <S.ImageWatchProvider
       defaultSource={require('../../Assets/defaultImage.jpg')}
       source={{uri: `${imageUrl}${item?.logo_path}`}}
     />
   )
 
-  const RenderItemWatchProvider = memo(({item}: any) => (
+  const RenderItemWatchProvider = memo(({item}: {item: string}) => (
     <S.BoxListWatchProvider>
       <GlobalTextComponent
         color="lightColor"
@@ -64,8 +65,8 @@ export const MediaHubDetails = () => {
     </S.BoxListWatchProvider>
   ))
 
-  const RenderItemCast = memo(({item}: any) => (
-    <View>
+  const RenderItemCast = memo(({item}: {item: CastMember}) => (
+    <S.BoxRenderItemCast>
       <S.ImageCast
         defaultSource={require('../../Assets/defaultImage.jpg')}
         source={{uri: `${imageUrl}${item?.profile_path}`}}
@@ -87,20 +88,18 @@ export const MediaHubDetails = () => {
           numberOfLines={2}
         />
       </S.BoxCast>
-    </View>
+    </S.BoxRenderItemCast>
   ))
 
-  const RenderTrailer = memo(({item} : any) => (
-    <View style={{
-      marginRight: 10,
-    }}>
+  const RenderTrailer = memo(({item} : {item: MediaHubTrailerProps}) => (
+    <S.BoxTrailers>
       <YoutubePlayer
         height={270}
         width={270}
         volume={100}
         videoId={item?.key}
       />
-    </View>
+    </S.BoxTrailers>
   ))
 
   const ListImages = useCallback(() => (
@@ -145,18 +144,18 @@ export const MediaHubDetails = () => {
             text={`Trailers`}
             style={{paddingBottom: 16}}
           />
-          <FlatList
-            data={videos}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={{
-              width: '100%',
-              height: RFValue(135)
-            }}
-            renderItem={({item}) => (
-              <RenderTrailer item={item}/>
-            )}
-          />
+          <S.BoxListTrailers>
+            <FlashList
+              data={videos}
+              horizontal
+              estimatedItemSize={RFValue(270)}
+              estimatedListSize={{width: (videos?.length || 0) * RFValue(270), height: RFValue(270)}}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({item}) => (
+                <RenderTrailer item={item}/>
+              )}
+            />
+          </S.BoxListTrailers>
         </>
       ) : null
     )
@@ -195,14 +194,16 @@ export const MediaHubDetails = () => {
             text={`Elenco`}
             style={{paddingBottom: 16}}
           />
-          <FlatList
+          <FlashList
             data={cast}
             horizontal
+            estimatedItemSize={RFValue(90)}
+            contentContainerStyle={{paddingBottom: 16}}
+            estimatedListSize={{width: (cast?.length || 0) * RFValue(90), height: RFValue(130)}}
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
               <RenderItemCast item={item}/>
             )}
-            style={{paddingBottom: 16}}
           />
         </>
       ) : null

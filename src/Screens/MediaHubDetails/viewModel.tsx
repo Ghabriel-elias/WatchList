@@ -6,6 +6,7 @@ import { useCallback, useState } from "react";
 import { addFavorite, removeFavorite } from "../../Store/favorites";
 import dayjs from "dayjs";
 import { ShowProps } from "../Home/types";
+import { CastMember, MediaHubImagesProps, MediaHubProps, MediaHubTrailerProps, WatchOptions } from "./model";
 
 export const useMediaHubDetailsController = () => {
 
@@ -16,11 +17,11 @@ export const useMediaHubDetailsController = () => {
   const dispatch = useDispatch()
   const {favorites} = useSelector((store: RootState) => store.favorites)
   const showFavorited = !!(favorites?.find(favorite => favorite.id === mediaHubId))
-  const [mediaHub, setMediaHub] = useState()
-  const [watchProviders, setWatchProviders] = useState([])
-  const [cast, setCast] = useState([])
-  const [videos, setVideos] = useState([])
-  const [images, setImages] = useState([])
+  const [mediaHub, setMediaHub] = useState<MediaHubProps>()
+  const [watchProviders, setWatchProviders] = useState<WatchOptions[]>([])
+  const [cast, setCast] = useState<CastMember[]>([])
+  const [videos, setVideos] = useState<MediaHubTrailerProps[]>([])
+  const [images, setImages] = useState<MediaHubImagesProps[]>([])
   const formatGenres = mediaHub?.genres?.slice(0, 2)?.map(genre => genre?.name)?.join('/')
   const notRelease = Number(dayjs(mediaHub?.release_date || mediaHub?.first_air_date)) > Number(dayjs())
   const [loading, setLoading] = useState(true)
