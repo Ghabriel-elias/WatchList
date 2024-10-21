@@ -108,8 +108,8 @@ export const MediaHubDetails = () => {
       <Carousel
         testID={"xxx"}
         loop={true}
-        width={430}
-        height={258}
+        width={Dimensions.get('screen').width}
+        height={RFValue(200)}
         snapEnabled={true}
         pagingEnabled={true}
         autoPlay={true}
@@ -137,7 +137,9 @@ export const MediaHubDetails = () => {
   const ListVideos = useCallback(() => {
     return (
       videos.length > 1 ? (
-        <>    
+        <View style={{
+          marginBottom: 16
+        }}>    
           <GlobalTextComponent
             color="lightColor"
             fontFamily="poppinsSemiBold"
@@ -157,7 +159,7 @@ export const MediaHubDetails = () => {
               )}
             />
           </S.BoxListTrailers>
-        </>
+        </View>
       ) : null
     )
   }, [videos])
