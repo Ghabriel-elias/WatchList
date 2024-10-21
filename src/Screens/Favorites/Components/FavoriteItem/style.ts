@@ -22,3 +22,11 @@ export const BoxTexts = styled.View`
   justify-content: space-evenly;
   flex: 1;
 `;
+
+export const ExcludeFavorite = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.5
+})`
+  justify-content: center;
+  width: 15%;
+  align-items: center;
+`;

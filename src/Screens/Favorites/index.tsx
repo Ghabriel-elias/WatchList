@@ -11,13 +11,17 @@ export const Favorites = () => {
     favorites,
     formatInfo,
     goBack,
-    navigate
+    navigate,
+    handleExcludeFav
   } = useFavoritesController()
 
   const renderItem = ({item}: any) => (
     <FavoriteItem 
       item={item}
       formatInfo={formatInfo}
+      handleExcludeFav={() => {
+        handleExcludeFav(item)
+      }}
       handleRenderItem={() => {
         navigate('MediaHubDetails', {item, selectedTypeOfShow: item?.seasons ? 'tv' : 'movie'})
       }} 
@@ -42,6 +46,7 @@ export const Favorites = () => {
           <FlatList
             data={favorites}
             renderItem={renderItem}
+            showsVerticalScrollIndicator={false}
           />
         )}
       </S.MainContent>
