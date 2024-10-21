@@ -12,7 +12,7 @@ export const Container = styled.TouchableOpacity.attrs({
 
 export const FavoriteImage = styled.Image`
   height: ${RFValue(80)}px;
-  width: ${RFValue(120)}px;
+  width: ${RFValue(110)}px;
   border-radius: ${RFValue(8)}px;
   overflow: hidden;
 `;
