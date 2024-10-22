@@ -19,7 +19,7 @@ export const FavoriteItem = ({item, handleRenderItem, formatInfo, handleExcludeF
     <S.Container 
       onPress={handleRenderItem}>
       <S.FavoriteImage
-        resizeMode="cover"
+        resizeMode="stretch"
         defaultSource={require('../../../../Assets/defaultImage.jpg')}
         source={{uri: `${imageUrl}${item?.backdrop_path}`}}
       />
