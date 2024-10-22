@@ -27,7 +27,9 @@ export const BoxTrailers = styled.View`
   margin-right: ${RFValue(10)}px;
 `;
 
-export const BoxRenderItemCast = styled.View`
+export const BoxRenderItemCast = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.5
+})`
   height: ${RFValue(130)}px;
   width: ${RFValue(90)}px;
 `;

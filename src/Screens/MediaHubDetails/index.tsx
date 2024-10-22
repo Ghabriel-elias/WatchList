@@ -39,7 +39,9 @@ export const MediaHubDetails = () => {
     similar,
     handleNavigateShowDetails,
     videos,
-    images
+    images,
+    crew,
+    handleCast
   } = useMediaHubDetailsController()
 
   const renderItemIconWatchProvider = ({item}: {item: ProviderProps}) => (
@@ -66,8 +68,36 @@ export const MediaHubDetails = () => {
     </S.BoxListWatchProvider>
   ))
 
-  const RenderItemCast = memo(({item}: {item: CastMember}) => (
+  const RenderItemCrew = memo(({item}: {item: CastMember}) => (
     <S.BoxRenderItemCast>
+      <S.ImageCast
+        defaultSource={require('../../Assets/defaultImage.jpg')}
+        source={{uri: `${imageUrl}${item?.profile_path}`}}
+      />
+      <S.BoxCast>
+        <GlobalTextComponent
+          color="lightColor"
+          fontFamily="poppinsMedium"
+          fontSize={10}
+          text={item?.name}
+          numberOfLines={2}
+          style={{paddingBottom: 8}}
+        />
+        <GlobalTextComponent
+          color="lightColor"
+          fontFamily="poppinsRegular"
+          fontSize={9}
+          text={item?.job}
+          numberOfLines={2}
+        />
+      </S.BoxCast>
+    </S.BoxRenderItemCast>
+  ))
+
+  const RenderItemCast = memo(({item}: {item: CastMember}) => (
+    <S.BoxRenderItemCast onPress={() => {
+      handleCast(item)
+    }}>
       <S.ImageCast
         defaultSource={require('../../Assets/defaultImage.jpg')}
         source={{uri: `${imageUrl}${item?.profile_path}`}}
@@ -132,7 +162,7 @@ export const MediaHubDetails = () => {
         source={{uri: `${imageUrl}${mediaHub?.backdrop_path}`}}
       />
     )
-  ), [images])
+  ), [images, mediaHub])
 
   const ListVideos = useCallback(() => {
     return (
@@ -185,6 +215,33 @@ export const MediaHubDetails = () => {
       ) : null
     )
   }, [keysWatchProviders])
+
+  const ListCrew = useCallback(() => {
+    return (
+      crew?.length ? (
+        <View style={{marginTop: 16}}>
+          <GlobalTextComponent
+            color="lightColor"
+            fontFamily="poppinsSemiBold"
+            fontSize={18}
+            text={`Equipe Técnica`}
+            style={{paddingBottom: 16}}
+          />
+          <FlashList
+            data={crew}
+            horizontal
+            estimatedItemSize={RFValue(90)}
+            contentContainerStyle={{paddingBottom: 16}}
+            estimatedListSize={{width: (crew?.length || 0) * RFValue(90), height: RFValue(130)}}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({item}) => (
+              <RenderItemCrew item={item}/>
+            )}
+          />
+        </View>
+      ) : null
+    )
+  }, [crew])
 
   const ListCast = useCallback(() => {
     return (
@@ -267,6 +324,7 @@ export const MediaHubDetails = () => {
           <ListVideos/>
           <ListProviders/>
           <ListCast/>
+          {/* <ListCrew/> */}
         {/* {similar?.length > 1 ? (
           <>
             <GlobalTextComponent

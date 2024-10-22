@@ -5,6 +5,7 @@ import * as S from './style'
 import { FlashList } from "@shopify/flash-list"
 import { RenderItemListShows } from "../Home/Components/RenderItemListShows"
 import { useSearchController } from "./viewModel"
+import { TypeOfShow } from "../Home/model"
 
 export const Search = () => {
 
@@ -22,7 +23,7 @@ export const Search = () => {
     listOfTypeShows
   } = useSearchController()
 
-  const renderItemTypeShow = ({item}: any) => (
+  const renderItemTypeShow = ({item}: TypeOfShow) => (
     <S.ButtonRenderItem
       selected={selectedTypeOfShow?.id === item.id}
       onPress={() => {
@@ -32,7 +33,7 @@ export const Search = () => {
         color={selectedTypeOfShow?.id === item?.id ? 'darkColor' : 'lightColor'}
         fontFamily='poppinsMedium'
         fontSize={12}
-        text={item.name}
+        text={`${item.name} (${item?.data?.length})`}
       />
     </S.ButtonRenderItem>
   )
@@ -97,6 +98,7 @@ export const Search = () => {
         data={dataList}
         renderItem={({item}) => RenderItemListShows({item, handleRenderItem: handleNavigateShowDetails, renderSkeleton: !dataList?.length})}
         numColumns={3}
+        key={selectedTypeOfShow.id}
         ListHeaderComponent={ListHeaderComponent}
         estimatedItemSize={140}
         ListEmptyComponent={ListEmptyComponent}

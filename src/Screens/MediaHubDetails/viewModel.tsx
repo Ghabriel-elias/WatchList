@@ -2,7 +2,7 @@ import { useFocusEffect, useNavigation, useRoute } from "@react-navigation/nativ
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Store/store";
 import api, { getCastRequest, getImages, getMediaHubDetailsRequest, getSimilar, getVideos, getWatchProvidersRequest } from "../../Services/api";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { addFavorite, removeFavorite } from "../../Store/favorites";
 import dayjs from "dayjs";
 import { ShowProps } from "../Home/types";
@@ -20,6 +20,7 @@ export const useMediaHubDetailsController = () => {
   const [mediaHub, setMediaHub] = useState<MediaHubProps>()
   const [watchProviders, setWatchProviders] = useState<WatchOptions[]>([])
   const [cast, setCast] = useState<CastMember[]>([])
+  const [crew, setCrew] = useState([])
   const [videos, setVideos] = useState<MediaHubTrailerProps[]>([])
   const [images, setImages] = useState<MediaHubImagesProps[]>([])
   const formatGenres = mediaHub?.genres?.slice(0, 2)?.map(genre => genre?.name)?.join('/')
@@ -35,47 +36,40 @@ export const useMediaHubDetailsController = () => {
 
   async function getMediaHubDetail() {
     const response = await getMediaHubDetailsRequest(typeOfShow, mediaHubId)
-    if (response) {
-      setMediaHub(response)
-    }
+    setMediaHub(response || undefined)
   }
 
 
   async function getMediaHubVideos() {
     const response = await getVideos(typeOfShow, mediaHubId)
-    if (response) {
-      setVideos(response?.results)
-    }
+    setVideos(response?.results || [])
   }
   
   async function getImagesMediaHub() {
     const response = await getImages(typeOfShow, mediaHubId)
-    if (response) {
-      setImages(response?.backdrops)
-    }
+    setImages(response?.backdrops || [])
   }
 
   async function getSimilarMediaHub() {
     const response = await getSimilar(typeOfShow, mediaHubId)
-    if (response?.results) {
-      setSimilar(response?.results)
-    }
+    setSimilar(response?.results || [])
   }
 
   async function getWatchProviders() {
     const response = await getWatchProvidersRequest(typeOfShow, mediaHubId)
     const watchProvidersBr = response?.results['BR']
-    if (watchProvidersBr) {
-      setWatchProviders(watchProvidersBr)
-    }
+    setWatchProviders(watchProvidersBr || [])
+  }
+
+  function handleCast(item: CastMember) {
+    navigate('PersonDetails', {id: item?.id})
   }
 
   async function getCast() {
     const response = await getCastRequest(typeOfShow, mediaHubId)
-    if (response?.cast) {
-      setCast(response?.cast)
-      setLoading(false)
-    }
+    setCrew(response?.crew || [])
+    setCast(response?.cast || [])
+    setLoading(false)
   }
 
   function formatRuntime() {
@@ -96,16 +90,23 @@ export const useMediaHubDetailsController = () => {
     }
   }
 
-  useFocusEffect(
-    useCallback(() => {
-      getMediaHubDetail()
-      getWatchProviders()
-      getImagesMediaHub()
-      // getSimilarMediaHub()
-      getMediaHubVideos()
-      getCast()
-    }, [])
-  )
+  useEffect(() => {
+    if(route?.params?.update) {
+      setLoading(true)
+    }
+    getMediaHubDetail()
+    getWatchProviders()
+    getImagesMediaHub()
+    // getSimilarMediaHub()
+    getMediaHubVideos()
+    getCast()
+  }, [route?.params])
+
+  // useFocusEffect(
+  //   useCallback(() => {
+   
+  //   }, [route?.params])
+  // )
 
   return {
     goBack,
@@ -123,6 +124,8 @@ export const useMediaHubDetailsController = () => {
     similar,
     handleNavigateShowDetails,
     videos,
-    images
+    images,
+    crew,
+    handleCast
   }
 }

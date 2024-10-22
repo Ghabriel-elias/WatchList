@@ -5,6 +5,9 @@ export type RootStackParamList = {
   MediaHubDetails: ShowProps;
   Favorites: undefined;
   Search: undefined;
+  PersonDetails: {
+    id: number;
+  };
 };
 
 export type NavigationProp = StackNavigationProp<RootStackParamList>;

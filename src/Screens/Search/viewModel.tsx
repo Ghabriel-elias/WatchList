@@ -7,15 +7,16 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native"
 
 export const useSearchController = () => {
     
-  const listOfTypeShows: TypeOfShow[] = [
-    {id: 0, name: 'Filmes'},
-    {id: 1, name: 'Séries'},
-  ]
+
   const [value, setValue] = useState('')
   const inputRef = useRef<TextInput>()
   const debounce = useDebounce()
   const [series, setSeries] = useState([])
   const [movies, setMovies] = useState([])
+  const listOfTypeShows: TypeOfShow[] = [
+    {id: 0, name: 'Filmes', data: movies},
+    {id: 1, name: 'Séries', data: series},
+  ]
   const {navigate} = useNavigation()
   const [selectedTypeOfShow, setSelectedTypeOfShow] = useState<TypeOfShow>(listOfTypeShows[0])
   const [trendingMedia, setTrendingMedia] = useState([])

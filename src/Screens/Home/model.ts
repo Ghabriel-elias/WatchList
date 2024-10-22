@@ -1,8 +1,9 @@
 
 export interface TypeOfShow {
-    id: number;
-    name: string;
-  }
+  id: number;
+  name: string;
+  data?: any[]
+}
   
   export interface HeaderHomeProps {
     handleRenderItem: (item: TypeOfShow) => Promise<void>;
