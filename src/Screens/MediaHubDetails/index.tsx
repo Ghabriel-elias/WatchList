@@ -1,7 +1,7 @@
 import { GlobalTextComponent } from "../../Components/GlobalTextComponent";
 import { IconComponent } from "./Components/IconComponent";
 import * as S from './style'
-import { Dimensions, FlatList, Image, View } from "react-native";
+import { Animated, Dimensions, FlatList, Image, TouchableOpacity, View } from "react-native";
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 import { RFValue } from "react-native-responsive-fontsize";
 import { useMediaHubDetailsController } from "./viewModel";
@@ -11,7 +11,7 @@ import { FlashList } from "@shopify/flash-list";
 import { RenderItemListShows } from "../Home/Components/RenderItemListShows";
 import YoutubePlayer from "react-native-youtube-iframe";
 import Carousel from "react-native-reanimated-carousel";
-import { memo, useCallback, useMemo } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CastMember, MediaHubTrailerProps, ProviderProps, WatchOptions } from "./model";
 
 const keysForWatch = {
@@ -270,6 +270,31 @@ export const MediaHubDetails = () => {
     )
   }, [cast])
 
+  const [isExpanded, setIsExpanded] = useState(false);
+  const heightAnim = useRef(new Animated.Value(40)).current; // Começa com altura pequena
+  const opacityAnim = useRef(new Animated.Value(1)).current; // Opacidade total
+
+  useEffect(() => {
+    Animated.parallel([
+      // Animação de altura para expandir ou retrair
+      Animated.timing(heightAnim, {
+        toValue: isExpanded ? 100 : 40, // Expande para 100, recolhe para 40
+        duration: 300, // Duração da animação
+        useNativeDriver: false, // Desativado para manipular altura
+      }),
+      // Animação de opacidade para aparecer/desaparecer suavemente
+      Animated.timing(opacityAnim, {
+        toValue: isExpanded ? 0.5 : 1, // Opacidade muda durante a animação
+        duration: 300, 
+        useNativeDriver: false, 
+      }),
+    ]).start();
+  }, [isExpanded]);
+  const handleToggleExpand = () => {
+    setIsExpanded(prev => !prev);
+  };
+
+
   if(loading) {
     return (
       <GlobalLoading/>
@@ -313,14 +338,68 @@ export const MediaHubDetails = () => {
           style={{paddingBottom: 16}}
         />
         {mediaHub?.overview ? (
-          <GlobalTextComponent
-            color="lightColor"
-            fontFamily="poppinsMedium"
-            fontSize={12}
-            text={`${mediaHub?.overview}`}
-            style={{paddingBottom: 16}}
-          />
+           <Animated.View
+           style={{
+             height: heightAnim, // Altura animada
+            //  opacity: opacityAnim, // Opacidade animada
+           }}
+         >
+
+          <TouchableOpacity 
+          onPress={handleToggleExpand}
+          activeOpacity={0.5}>
+            <GlobalTextComponent
+              color="lightColor"
+              fontFamily="poppinsMedium"
+              fontSize={12}
+              text={mediaHub?.overview}
+              numberOfLines={isExpanded ? undefined : 3} // Limitar a 3 linhas quando não expandido
+              style={{ paddingBottom: 16 }}
+            />
+            {!isExpanded ? (
+            <View
+                style={{
+                  width: '100%',
+                  flex: 1,
+                  position: 'absolute',
+                  bottom: 12,
+                }}
+              >
+                <View style={{
+                  width: '100%',
+                  alignItems: 'flex-end',
+                  // paddingRight: 10,
+                }}>
+                  <GlobalTextComponent
+                    color="secundaryColor" 
+                    fontFamily="poppinsMedium"
+                    fontSize={11}
+                    text="mais"
+                    style={{ 
+                      backgroundColor: '#242a32f1',
+                      shadowOffset: { width: 2, height: 0 },
+                      padding: 4,
+                      paddingHorizontal: 10
+                    }}
+                  />
+                </View>
+              </View>
+            ) : null}
+            {/* {isExpanded && (
+              <TouchableOpacity onPress={handleToggleExpand}>
+                <GlobalTextComponent
+                  color="secundaryColor"
+                  fontFamily="poppinsMedium"
+                  fontSize={12}
+                  text="Menos"
+                  style={{ textDecorationLine: 'underline' }}
+                />
+              </TouchableOpacity>
+            )} */}
+          </TouchableOpacity>
+         </Animated.View>
         ) : null}
+
           <ListVideos/>
           <ListProviders/>
           <ListCast/>
