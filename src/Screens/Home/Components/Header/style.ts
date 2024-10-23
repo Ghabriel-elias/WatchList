@@ -26,7 +26,7 @@ export const ButtonRenderItem = styled.TouchableOpacity.attrs({
 })<StyleRenderItemProps>`
   background-color: ${({theme, selected}) => selected ? theme.colors.lightColor : theme.colors.transparent};
   padding: ${RFValue(8)}px 0px;
-  width: ${RFValue(80)}px;
+  width: ${RFValue(90)}px;
   align-items: center;
   justify-content: center;
   border-radius: ${RFValue(16)}px;

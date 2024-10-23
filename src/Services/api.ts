@@ -81,19 +81,32 @@ export async function searchMediaHub(term: string) {
   try {
     const queryMovies = `/search/movie`
     const querySeries = `/search/tv`
+    const queryPersons = `/search/person`
     const responseMovies = await api.get(queryMovies, {
       params: {
         api_key: apikey,
-        query: term
+        query: term,
+        include_adult: false,
+        language: "pt-BR"
       }
     })
     const responseSeries = await api.get(querySeries, {
       params: {
         api_key: apikey,
-        query: term
+        query: term,
+        include_adult: false,
+        language: "pt-BR"
       }
     })
-    return {movies: responseMovies?.data?.results, series: responseSeries?.data?.results}
+    const responsePersons = await api.get(queryPersons, {
+      params: {
+        api_key: apikey,
+        query: term,
+        include_adult: false,
+        language: "pt-BR"
+      }
+    })
+    return {movies: responseMovies?.data?.results, series: responseSeries?.data?.results, persons: responsePersons?.data?.results}
   } catch (error: any) {
     throw new Error(error?.response?.data?.message || 'Erro ao buscar gêneros, por favor tente novamente')
   }

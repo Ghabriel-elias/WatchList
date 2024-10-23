@@ -13,7 +13,7 @@ export const useMediaHubDetailsController = () => {
   const route = useRoute()
   const mediaHubId = route?.params?.item?.id
   const typeOfShow = route?.params?.selectedTypeOfShow
-  const {goBack, navigate}  = useNavigation()
+  const {goBack, navigate,push}  = useNavigation()
   const dispatch = useDispatch()
   const {favorites} = useSelector((store: RootState) => store.favorites)
   const showFavorited = !!(favorites?.find(favorite => favorite.id === mediaHubId))
@@ -30,8 +30,7 @@ export const useMediaHubDetailsController = () => {
   const keysWatchProviders = [...Object.keys(watchProviders)]?.filter(key => key != 'link')
 
   function handleNavigateShowDetails(item: ShowProps) {
-    goBack()
-    navigate('MediaHubDetails', {item, selectedTypeOfShow: typeOfShow})
+    push('MediaHubDetails', {item, selectedTypeOfShow: typeOfShow})
   }
 
   async function getMediaHubDetail() {
@@ -62,7 +61,7 @@ export const useMediaHubDetailsController = () => {
   }
 
   function handleCast(item: CastMember) {
-    navigate('PersonDetails', {id: item?.id})
+    push('PersonDetails', {id: item?.id})
   }
 
   async function getCast() {
@@ -91,22 +90,13 @@ export const useMediaHubDetailsController = () => {
   }
 
   useEffect(() => {
-    if(route?.params?.update) {
-      setLoading(true)
-    }
     getMediaHubDetail()
     getWatchProviders()
     getImagesMediaHub()
     // getSimilarMediaHub()
     getMediaHubVideos()
     getCast()
-  }, [route?.params])
-
-  // useFocusEffect(
-  //   useCallback(() => {
-   
-  //   }, [route?.params])
-  // )
+  }, [])
 
   return {
     goBack,

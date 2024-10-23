@@ -6,6 +6,11 @@ import { FlashList } from "@shopify/flash-list"
 import { RenderItemListShows } from "../Home/Components/RenderItemListShows"
 import { useSearchController } from "./viewModel"
 import { TypeOfShow } from "../Home/model"
+import { imageUrl } from "../../Global/imageUrl"
+import { memo } from "react"
+import { CastMember } from "../MediaHubDetails/model"
+import { RFValue } from "react-native-responsive-fontsize"
+import { departmentFormat } from "../../Utils/mask"
 
 export const Search = () => {
 
@@ -20,14 +25,19 @@ export const Search = () => {
     handleIcon,
     dataList,
     handleNavigateShowDetails,
-    listOfTypeShows
+    listOfTypeShows,
+    navigate,
+    persons,
+    handleCast,
+    handleTypeShow,
+    refListTypeShow
   } = useSearchController()
 
-  const renderItemTypeShow = ({item}: TypeOfShow) => (
+  const renderItemTypeShow = ({item, index}: {item: TypeOfShow, index: number}) => (
     <S.ButtonRenderItem
       selected={selectedTypeOfShow?.id === item.id}
       onPress={() => {
-        setSelectedTypeOfShow(item)
+        handleTypeShow(item, index)
       }}>
       <GlobalTextComponent
         color={selectedTypeOfShow?.id === item?.id ? 'darkColor' : 'lightColor'}
@@ -37,6 +47,34 @@ export const Search = () => {
       />
     </S.ButtonRenderItem>
   )
+
+  const RenderItemCast = memo(({item}: {item: CastMember}) => (
+    <S.BoxRenderItemCast onPress={() => {
+      handleCast(item)
+    }}>
+      <S.ImageCast
+        defaultSource={require('../../Assets/defaultImage.jpg')}
+        source={{uri: `${imageUrl}${item?.profile_path}`}}
+      />
+      <S.BoxCast>
+        <GlobalTextComponent
+          color="lightColor"
+          fontFamily="poppinsMedium"
+          fontSize={10}
+          text={item?.name}
+          numberOfLines={2}
+          style={{paddingBottom: 8}}
+        />
+        <GlobalTextComponent
+          color="lightColor"
+          fontFamily="poppinsRegular"
+          fontSize={9}
+          text={departmentFormat[item?.known_for_department]}
+          numberOfLines={2}
+        />
+      </S.BoxCast>
+    </S.BoxRenderItemCast>
+  ))
 
   const ListHeaderComponent = () => (
     value?.length === 0 
@@ -88,25 +126,45 @@ export const Search = () => {
             style={{marginTop: 16}}
             data={listOfTypeShows}
             horizontal
+            ref={refListTypeShow}
             keyboardShouldPersistTaps='always'
             renderItem={renderItemTypeShow}
+            showsHorizontalScrollIndicator={false}
           />
         ) : null}
       </S.ContainerHeader>
-      <FlashList
-        scrollEnabled={!!dataList?.length}
-        data={dataList}
-        renderItem={({item}) => RenderItemListShows({item, handleRenderItem: handleNavigateShowDetails, renderSkeleton: !dataList?.length})}
-        numColumns={3}
-        key={selectedTypeOfShow.id}
-        ListHeaderComponent={ListHeaderComponent}
-        estimatedItemSize={140}
-        ListEmptyComponent={ListEmptyComponent}
-        keyboardShouldPersistTaps='always'
-        estimatedListSize={{width: Dimensions.get('screen').width, height: dataList?.length * 140 - 4}}
-        contentContainerStyle={{paddingHorizontal: 20}}
-        showsVerticalScrollIndicator={false}
-      />
+      {selectedTypeOfShow?.name === 'Pessoas' ? (
+         <FlashList
+          scrollEnabled={!!persons?.length}
+          data={persons}
+          renderItem={({item}) => (
+            <RenderItemCast item={item}/>
+          )}
+          numColumns={3}
+          ListHeaderComponent={ListHeaderComponent}
+          estimatedItemSize={RFValue(130)}
+          ListEmptyComponent={ListEmptyComponent}
+          keyboardShouldPersistTaps='always'
+          estimatedListSize={{width: Dimensions.get('screen').width, height: persons?.length * RFValue(130) - 4}}
+          contentContainerStyle={{paddingHorizontal: 20}}
+          showsVerticalScrollIndicator={false}
+        />
+      ) : (
+        <FlashList
+          scrollEnabled={!!dataList?.length}
+          data={dataList}
+          renderItem={({item}) => RenderItemListShows({item, handleRenderItem: handleNavigateShowDetails, renderSkeleton: !dataList?.length})}
+          numColumns={3}
+          key={selectedTypeOfShow.id}
+          ListHeaderComponent={ListHeaderComponent}
+          estimatedItemSize={140}
+          ListEmptyComponent={ListEmptyComponent}
+          keyboardShouldPersistTaps='always'
+          estimatedListSize={{width: Dimensions.get('screen').width, height: dataList?.length * 140 - 4}}
+          contentContainerStyle={{paddingHorizontal: 20}}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
     </S.Container>
   )
 }

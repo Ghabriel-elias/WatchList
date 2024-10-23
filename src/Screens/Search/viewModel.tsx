@@ -4,6 +4,7 @@ import { useDebounce } from "../../Hooks/useDebounce"
 import { ShowProps, TypeOfShow } from "../Home/model"
 import { getTrendingMediaRequest, searchMediaHub } from "../../Services/api"
 import { useFocusEffect, useNavigation } from "@react-navigation/native"
+import { CastMember } from "../MediaHubDetails/model"
 
 export const useSearchController = () => {
     
@@ -13,26 +14,45 @@ export const useSearchController = () => {
   const debounce = useDebounce()
   const [series, setSeries] = useState([])
   const [movies, setMovies] = useState([])
+  const [persons, setPersons] = useState([])
   const listOfTypeShows: TypeOfShow[] = [
     {id: 0, name: 'Filmes', data: movies},
     {id: 1, name: 'Séries', data: series},
+    {id: 3, name: 'Pessoas', data: series},
   ]
   const {navigate} = useNavigation()
   const [selectedTypeOfShow, setSelectedTypeOfShow] = useState<TypeOfShow>(listOfTypeShows[0])
   const [trendingMedia, setTrendingMedia] = useState([])
   const dataList = value?.length === 0 ? trendingMedia : selectedTypeOfShow?.name === 'Filmes' ? movies : series
+  const refListTypeShow = useRef<FlatList>()
 
   function handleIcon() {
     setValue("")
     Keyboard.dismiss()
     setMovies([])
     setSeries([])
+    setSelectedTypeOfShow(listOfTypeShows[0])
   }
 
   async function searchMedia(term: string) {
     const resultSearch = await searchMediaHub(term)
     setMovies(resultSearch?.movies)
     setSeries(resultSearch?.series)
+    setPersons(resultSearch?.persons)
+  }
+
+  function handleCast(item: CastMember) {
+    navigate('PersonDetails', {id: item?.id})
+  }
+
+  function handleTypeShow(item: TypeOfShow, index: number) {
+    setSelectedTypeOfShow(item)
+    refListTypeShow.current?.scrollToIndex({
+      index: index,
+      viewOffset: 0,
+      viewPosition: 0,
+      animated: true
+    })
   }
   
   async function getTrendingMedia() {
@@ -61,6 +81,11 @@ export const useSearchController = () => {
     handleIcon,
     dataList,
     handleNavigateShowDetails,
-    listOfTypeShows
+    listOfTypeShows,
+    persons,
+    navigate,
+    handleTypeShow,
+    handleCast,
+    refListTypeShow
   }
 }

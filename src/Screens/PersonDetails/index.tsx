@@ -14,6 +14,7 @@ import { FlatList } from 'react-native-gesture-handler'
 import { ShowProps, TypeOfShow } from '../Home/model'
 import { RenderItemListShows } from '../Home/Components/RenderItemListShows'
 import { FlashList } from '@shopify/flash-list'
+import { departmentFormat } from '../../Utils/mask'
 
 const genderFormat = {
   0: 'Não definido / Não especificado',
@@ -22,16 +23,12 @@ const genderFormat = {
   3: 'Não-binário'
 };
 
-const departmentFormat = {
-  Acting: 'Atuação',
-};
-
 export const PersonDetails = () => {
 
   const [loading, setLoading] = useState(true)
   const [personDetails, setPersonDetails] = useState<PersonProps>()
   const {params} = useRoute()
-  const {navigate, goBack} = useNavigation()
+  const {push} = useNavigation()
   dayjs.locale('pt-br');
   const [series, setSeries] = useState([])
   const [movies, setMovies] = useState([])
@@ -43,7 +40,7 @@ export const PersonDetails = () => {
   const dataList = selectedTypeOfShow?.name === 'Filmes' ? movies : series
 
   function handleNavigateShowDetails(item: ShowProps) {
-    navigate('MediaHubDetails', {item, update: true, selectedTypeOfShow: selectedTypeOfShow?.name === 'Filmes' ? 'movie' : 'tv'})
+    push('MediaHubDetails', {item, update: true, selectedTypeOfShow: selectedTypeOfShow?.name === 'Filmes' ? 'movie' : 'tv'})
   }
 
   async function getPersonDetails() {
@@ -86,12 +83,10 @@ export const PersonDetails = () => {
     </S.ButtonRenderItem>
   )
 
-  useFocusEffect(
-    useCallback(() => {
-      getPersonDetails()
-      getPersonCredits()
-    }, [])
-  )
+  useEffect(() => {
+    getPersonDetails()
+    getPersonCredits()
+  }, [])
 
   if(loading) {
     return (
